@@ -41,7 +41,7 @@
   display: none;
 }
 
-/* Remove label for icon-onlyd */
+/* Remove label for icon-only */
 .arkem-btn[data-icon-only="true"] .arkem-btn__label {
   display: none;
 }

@@ -1,4 +1,3 @@
-
 .arkem-btn {
   display: inline-flex;
   align-items: center;
@@ -11,8 +10,9 @@
   background: transparent;
   border-radius: var(--radius-mode-1-radius-md);
   border: 1px solid transparent;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease,
-    box-shadow 0.15s ease, font-weight 0.15s ease, opacity 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease, font-weight 0.15s ease,
+    opacity 0.15s ease;
   outline: none;
   cursor: pointer;
 }
@@ -41,7 +41,7 @@
   display: none;
 }
 
-/* Remove label for icon-only */
+/* Remove label for icon-onlyd */
 .arkem-btn[data-icon-only="true"] .arkem-btn__label {
   display: none;
 }
@@ -157,8 +157,7 @@
   border-radius: var(--radius-xs);
   border-width: 1px;
   border-color: var(--border-text-strong);
-  box-shadow: var(--shadow-xs),
-    0 0 0 3px var(--semantic-focus-ring);
+  box-shadow: var(--shadow-xs), 0 0 0 3px var(--semantic-focus-ring);
 }
 
 [data-hierarchy="secondary"][data-size="md"][data-tone="black"]:disabled,
@@ -236,8 +235,7 @@
 [data-size="lg"][data-tone="black"]:hover {
   border-width: 1px;
   border-color: var(--semantic-border-stroke);
-  outline: 2px solid
-    var(--semantic-focus-ring, var(--semantic-brand-base));
+  outline: 2px solid var(--semantic-focus-ring, var(--semantic-brand-base));
   outline-offset: 0;
   background: color-mix(
     in srgb,
@@ -310,8 +308,7 @@
 [data-hierarchy="secondary"][data-tone="black"][data-forced-state="focused"] {
   border-width: 1px;
   border-color: var(--semantic-border-stroke);
-  box-shadow: var(--shadow-xs),
-    0 0 0 3px var(--semantic-focus-ring);
+  box-shadow: var(--shadow-xs), 0 0 0 3px var(--semantic-focus-ring);
 }
 
 [data-hierarchy="secondary"][data-tone="black"]:disabled,
@@ -369,9 +366,13 @@
 
 /* Reset to 1px on hover/focus for all black buttons (except mode which maintains its own border) */
 .arkem-btn[data-tone="black"]:not([data-hierarchy="mode"]):hover,
-.arkem-btn[data-tone="black"]:not([data-hierarchy="mode"])[data-forced-state="hover"],
+.arkem-btn[data-tone="black"]:not(
+    [data-hierarchy="mode"]
+  )[data-forced-state="hover"],
 .arkem-btn[data-tone="black"]:not([data-hierarchy="mode"]):focus-visible,
-.arkem-btn[data-tone="black"]:not([data-hierarchy="mode"])[data-forced-state="focused"] {
+.arkem-btn[data-tone="black"]:not(
+    [data-hierarchy="mode"]
+  )[data-forced-state="focused"] {
   border-width: 1px;
   border-color: var(--semantic-border-stroke);
 }
@@ -500,12 +501,16 @@
 }
 
 .arkem-btn[data-function="feature"]:hover .arkem-btn__icon svg,
-.arkem-btn[data-function="feature"][data-forced-state="hover"] .arkem-btn__icon svg {
+.arkem-btn[data-function="feature"][data-forced-state="hover"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-brand-base);
 }
 
 .arkem-btn[data-function="feature"]:focus-visible .arkem-btn__icon svg,
-.arkem-btn[data-function="feature"][data-forced-state="focused"] .arkem-btn__icon svg {
+.arkem-btn[data-function="feature"][data-forced-state="focused"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-brand-base);
 }
 
@@ -528,7 +533,9 @@
 }
 
 .arkem-btn[data-function="action"]:hover .arkem-btn__icon svg,
-.arkem-btn[data-function="action"][data-forced-state="hover"] .arkem-btn__icon svg {
+.arkem-btn[data-function="action"][data-forced-state="hover"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-secondary);
 }
 
@@ -536,11 +543,17 @@
 .arkem-btn[data-function="action"][data-forced-state="focused"] {
   background: transparent;
   border: none;
-  box-shadow: 0 0 0 3px var(--semantic-focus-ring, color-mix(in srgb, var(--semantic-brand-base) 60%, transparent));
+  box-shadow: 0 0 0 3px
+    var(
+      --semantic-focus-ring,
+      color-mix(in srgb, var(--semantic-brand-base) 60%, transparent)
+    );
 }
 
 .arkem-btn[data-function="action"]:focus-visible .arkem-btn__icon svg,
-.arkem-btn[data-function="action"][data-forced-state="focused"] .arkem-btn__icon svg {
+.arkem-btn[data-function="action"][data-forced-state="focused"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-secondary);
 }
 
@@ -572,7 +585,9 @@
 }
 
 .arkem-btn[data-function="table-action"]:hover .arkem-btn__icon svg,
-.arkem-btn[data-function="table-action"][data-forced-state="hover"] .arkem-btn__icon svg {
+.arkem-btn[data-function="table-action"][data-forced-state="hover"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-secondary);
 }
 
@@ -580,11 +595,17 @@
 .arkem-btn[data-function="table-action"][data-forced-state="focused"] {
   background: transparent;
   border: none;
-  box-shadow: 0 0 0 3px var(--semantic-focus-ring, color-mix(in srgb, var(--semantic-brand-base) 60%, transparent));
+  box-shadow: 0 0 0 3px
+    var(
+      --semantic-focus-ring,
+      color-mix(in srgb, var(--semantic-brand-base) 60%, transparent)
+    );
 }
 
 .arkem-btn[data-function="table-action"]:focus-visible .arkem-btn__icon svg,
-.arkem-btn[data-function="table-action"][data-forced-state="focused"] .arkem-btn__icon svg {
+.arkem-btn[data-function="table-action"][data-forced-state="focused"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-secondary);
 }
 
@@ -620,7 +641,9 @@
 }
 
 .arkem-btn[data-function="borderless"]:hover .arkem-btn__icon svg,
-.arkem-btn[data-function="borderless"][data-forced-state="hover"] .arkem-btn__icon svg {
+.arkem-btn[data-function="borderless"][data-forced-state="hover"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-hover);
 }
 
@@ -630,11 +653,17 @@
 .arkem-btn[data-function="borderless"][data-hierarchy="secondary"][data-forced-state="focused"] {
   border: none !important;
   background: transparent;
-  box-shadow: 0 0 0 3px var(--semantic-focus-ring, color-mix(in srgb, var(--semantic-brand-base) 60%, transparent));
+  box-shadow: 0 0 0 3px
+    var(
+      --semantic-focus-ring,
+      color-mix(in srgb, var(--semantic-brand-base) 60%, transparent)
+    );
 }
 
 .arkem-btn[data-function="borderless"]:focus-visible .arkem-btn__icon svg,
-.arkem-btn[data-function="borderless"][data-forced-state="focused"] .arkem-btn__icon svg {
+.arkem-btn[data-function="borderless"][data-forced-state="focused"]
+  .arkem-btn__icon
+  svg {
   color: var(--semantic-text-primary);
 }
 
@@ -679,4 +708,3 @@
 .arkem-btn[data-function="close"][data-hierarchy="secondary"][data-forced-state="disabled"] {
   border: none !important;
 }
-

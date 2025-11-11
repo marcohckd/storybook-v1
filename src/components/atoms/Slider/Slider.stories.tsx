@@ -65,7 +65,7 @@ const [value, setValue] = useState([25, 75]);
 // With label and value display (like LimitsTab)
 <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)" }}>
   <Label>Storage Limit (GB)</Label>
-  <div style={{ fontSize: "var(--fonts-semantic-md)", color: "var(--semantic-text-secondary)" }}>
+  <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
     {value[0]} - {value[1]} GB
   </div>
   <Slider
@@ -92,11 +92,13 @@ const [value, setValue] = useState([25, 75]);
 
 ### Key Tokens Used
 
-- \`--semantic-background-base\`: Slider track background
-- \`--semantic-background-interactive\`: Slider range (selected area)
-- \`--semantic-text-primary\`: Slider thumb color
+- \`--semantic-background-muted\`: Slider track background (inactive area)
+- \`--semantic-brand-base\`: Slider range (selected area) and thumb color
+- \`--semantic-background-base\`: Slider thumb border color
 - \`--semantic-focus-ring\`: Focus indicator
-- \`--semantic-border-subtle\`: Border color
+- \`--spacing-8\`: Track height
+- \`--spacing-16\`: Thumb size
+- \`--border-width-medium\`: Thumb border width
 
 **Note**: Always provide an \`ariaLabel\` for accessibility.`,
       },
@@ -165,7 +167,7 @@ export const Default: Story = {
 export const States: Story = {
   tags: ['!dev'],
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-style-spacing-4px-6-24px)", alignItems: "flex-start", width: "300px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-24)", alignItems: "flex-start", width: "300px" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)", width: "100%" }}>
         <label style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
           Default (25-75)
@@ -199,7 +201,7 @@ export const Interactive: Story = {
   render: () => {
     const [value, setValue] = useState([25, 75]);
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-style-spacing-4px-4-16px)", alignItems: "flex-start", width: "300px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-16)", alignItems: "flex-start", width: "300px" }}>
         <Slider
           value={value}
           onValueChange={setValue}
@@ -240,7 +242,7 @@ export const WithLabel: Story = {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              fontSize: "var(--fonts-semantic-md)",
+              fontSize: "var(--fonts-semantic-sm)",
               color: "var(--semantic-text-secondary)",
             }}
           >
@@ -272,7 +274,7 @@ export const WithLabel: Story = {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              fontSize: "var(--fonts-semantic-md)",
+              fontSize: "var(--fonts-semantic-sm)",
               color: "var(--semantic-text-secondary)",
             }}
           >
@@ -303,7 +305,7 @@ export const CustomRange: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-16)", width: "300px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)" }}>
           <Label>Percentage Range (0-100%)</Label>
-          <div style={{ fontSize: "var(--fonts-semantic-md)", color: "var(--semantic-text-secondary)" }}>
+          <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
             {percentage[0]}% - {percentage[1]}%
           </div>
           <Slider
@@ -318,7 +320,7 @@ export const CustomRange: Story = {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)" }}>
           <Label>Temperature Range (°C)</Label>
-          <div style={{ fontSize: "var(--fonts-semantic-md)", color: "var(--semantic-text-secondary)" }}>
+          <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
             {temperature[0]}°C - {temperature[1]}°C
           </div>
           <Slider
@@ -333,7 +335,7 @@ export const CustomRange: Story = {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)" }}>
           <Label>Price Range ($)</Label>
-          <div style={{ fontSize: "var(--fonts-semantic-md)", color: "var(--semantic-text-secondary)" }}>
+          <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
             ${priceRange[0]} - ${priceRange[1]}
           </div>
           <Slider
@@ -358,7 +360,7 @@ export const DifferentSteps: Story = {
     const [step10, setStep10] = useState([30, 70]);
     
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-style-spacing-4px-6-24px)", alignItems: "flex-start", width: "300px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-24)", alignItems: "flex-start", width: "300px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)", width: "100%" }}>
           <label style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
             Step: 1 (Smooth)
@@ -443,7 +445,7 @@ export const AccessibilityExample: Story = {
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-16)", width: "300px" }}>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-8)" }}>
           <Label>Accessible Range Slider</Label>
-          <div style={{ fontSize: "var(--fonts-semantic-md)", color: "var(--semantic-text-secondary)" }}>
+          <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
             Current: {value[0]} - {value[1]}
           </div>
           <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>

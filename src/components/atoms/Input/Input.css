@@ -196,34 +196,47 @@
   right: var(--spacing-8, 8px);
 }
 
-.arkem-input-wrapper .arkem-input__icon svg {
+/* Icon sizes per input size */
+.arkem-input-wrapper[data-size="sm"] .arkem-input__icon svg {
   width: var(--icon-size-sm);
   height: var(--icon-size-sm);
   color: currentColor;
 }
 
+.arkem-input-wrapper[data-size="md"] .arkem-input__icon svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  color: currentColor;
+}
+
+.arkem-input-wrapper[data-size="lg"] .arkem-input__icon svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: currentColor;
+}
+
 /* Adjust padding when icons are present - using data attributes for better browser support */
 .arkem-input-wrapper[data-has-leading="true"] .arkem-input--sm {
-  padding-left: calc(var(--spacing-style-spacing-4px-1-5-6px, 6px) + 16px + var(--spacing-8, 8px));
+  padding-left: calc(var(--spacing-style-spacing-4px-1-5-6px, 6px) + var(--icon-size-sm) + var(--spacing-8, 8px));
 }
 
 .arkem-input-wrapper[data-has-leading="true"] .arkem-input--md {
-  padding-left: calc(var(--spacing-8, 8px) + 16px + var(--spacing-8, 8px));
+  padding-left: calc(var(--spacing-8, 8px) + var(--icon-size-md) + var(--spacing-8, 8px));
 }
 
 .arkem-input-wrapper[data-has-leading="true"] .arkem-input--lg {
-  padding-left: calc(var(--spacing-style-spacing-4px-3-12px, 12px) + 16px + var(--spacing-8, 8px));
+  padding-left: calc(var(--spacing-style-spacing-4px-3-12px, 12px) + var(--icon-size-lg) + var(--spacing-8, 8px));
 }
 
 .arkem-input-wrapper[data-has-trailing="true"] .arkem-input--sm {
-  padding-right: calc(var(--spacing-style-spacing-4px-1-5-6px, 6px) + 16px + var(--spacing-8, 8px));
+  padding-right: calc(var(--spacing-style-spacing-4px-1-5-6px, 6px) + var(--icon-size-sm) + var(--spacing-8, 8px));
 }
 
 .arkem-input-wrapper[data-has-trailing="true"] .arkem-input--md {
-  padding-right: calc(var(--spacing-8, 8px) + 16px + var(--spacing-8, 8px));
+  padding-right: calc(var(--spacing-8, 8px) + var(--icon-size-md) + var(--spacing-8, 8px));
 }
 
 .arkem-input-wrapper[data-has-trailing="true"] .arkem-input--lg {
-  padding-right: calc(var(--spacing-style-spacing-4px-3-12px, 12px) + 16px + var(--spacing-8, 8px));
+  padding-right: calc(var(--spacing-style-spacing-4px-3-12px, 12px) + var(--icon-size-lg) + var(--spacing-8, 8px));
 }
 

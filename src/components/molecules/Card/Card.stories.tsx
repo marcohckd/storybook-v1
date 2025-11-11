@@ -56,7 +56,7 @@ export const WithHeader: Story = {
     <div style={{ width: "400px" }}>
       <Card>
         <CardHeader>
-          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
+          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-semibold)" }}>
             Card Title
           </h3>
         </CardHeader>
@@ -74,7 +74,7 @@ export const Complete: Story = {
     <div style={{ width: "400px" }}>
       <Card>
         <CardHeader>
-          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
+          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-semibold)" }}>
             Card Title
           </h3>
         </CardHeader>
@@ -105,7 +105,7 @@ export const EmptyState: Story = {
     <div style={{ width: "400px" }}>
       <Card>
         <CardHeader>
-          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
+          <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-semibold)" }}>
             Empty Card
           </h3>
         </CardHeader>
@@ -122,7 +122,7 @@ export const EmptyState: Story = {
           >
             <p
               style={{
-                fontSize: "var(--fonts-semantic-md)",
+                fontSize: "var(--fonts-semantic-sm)",
                 color: "var(--semantic-text-secondary)",
                 margin: "0 0 var(--spacing-8) 0",
               }}
@@ -163,7 +163,7 @@ export const WithForm: Story = {
       <div style={{ width: "400px" }}>
         <Card>
           <CardHeader>
-            <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
+            <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-semibold)" }}>
               User Registration
             </h3>
           </CardHeader>
@@ -223,35 +223,55 @@ export const WithTable: Story = {
     ];
     
     return (
-      <div style={{ width: "600px" }}>
-        <Card>
-          <CardHeader>
-            <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
-              Team Members
-            </h3>
-          </CardHeader>
-          <CardBody>
-            <Table ariaLabel="Team members table">
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Email</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {tableData.map((row, index) => (
-                  <TableRow key={row.id} isEven={index % 2 === 0}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.role}</TableCell>
-                    <TableCell>{row.email}</TableCell>
+      <>
+        <style>{`
+          .arkem-card__header--no-padding {
+            padding: 0 !important;
+          }
+          .arkem-card__body--no-padding {
+            padding: 0 !important;
+          }
+        `}</style>
+        <div style={{ width: "600px" }}>
+          <Card>
+            <CardHeader className="arkem-card__header--no-padding">
+              <h3
+                style={{
+                  margin: 0,
+                  padding: "var(--spacing-16)",
+                  fontSize: "var(--fonts-semantic-md)",
+                  lineHeight: "var(--fonts-semantic-lg-line-height)",
+                  fontWeight: "var(--font-weight-semibold)",
+                  fontFamily: "var(--font-family-base)",
+                  color: "var(--semantic-text-primary)",
+                }}
+              >
+                Team Members
+              </h3>
+            </CardHeader>
+            <CardBody className="arkem-card__body--no-padding">
+              <Table ariaLabel="Team members table">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Role</TableHead>
+                    <TableHead>Email</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardBody>
-        </Card>
-      </div>
+                </TableHeader>
+                <TableBody>
+                  {tableData.map((row, index) => (
+                    <TableRow key={row.id} isEven={index % 2 === 0}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.role}</TableCell>
+                      <TableCell>{row.email}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardBody>
+          </Card>
+        </div>
+      </>
     );
   },
 };

@@ -136,7 +136,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </span>
         <ChevronDown
           className={`arkem-dropdown__icon ${isOpen ? "arkem-dropdown__icon--open" : ""}`}
-          size={16}
           aria-hidden="true"
         />
       </button>

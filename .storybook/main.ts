@@ -5,8 +5,8 @@ const config: StorybookConfig & { autodocs?: string } = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@storybook/addon-docs',
-    // Disable a11y addon in dev for faster startup (can re-enable when needed)
-    // '@storybook/addon-a11y',
+    '@storybook/addon-a11y',
+    '@storybook/addon-themes',
     // Note: @storybook/addon-vitest is installed but only used for testing (vitest.setup.js)
     // Follower errors for 'storybook/status' and 'storybook/test-provider' are typically
     // harmless warnings that resolve after cache clear. They don't affect Storybook functionality.

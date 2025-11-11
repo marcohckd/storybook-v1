@@ -51,7 +51,7 @@ type Story = StoryObj<typeof meta>;
 
 export const FontWeights: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "600px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-24)", maxWidth: "600px" }}>
       <div>
         <h2 style={{ 
           fontFamily: "var(--font-family-base)",
@@ -174,7 +174,7 @@ export const FontSizes: Story = {
         </h2>
       </div>
       
-      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-12)" }}>
         <div style={{
           fontFamily: "var(--font-family-base)",
           fontSize: "var(--font-size-10)",

@@ -29,9 +29,10 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.2",
     "@jest/globals": "^30.2.0",
-    "@storybook/addon-a11y": "^10.0.6",
+    "@storybook/addon-a11y": "^10.0.7",
     "@storybook/addon-docs": "^10.0.2",
     "@storybook/addon-onboarding": "^10.0.2",
+    "@storybook/addon-themes": "^10.0.7",
     "@storybook/addon-vitest": "^10.0.6",
     "@storybook/react-vite": "^10.0.2",
     "@testing-library/jest-dom": "^6.9.1",

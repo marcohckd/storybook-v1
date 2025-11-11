@@ -51,7 +51,7 @@ Perfect for:
       <Input
         size="md"
         placeholder="Search users..."
-        iconLeading={<Search size={16} />}
+        iconLeading={<Search />}
       />
       <Dropdown
         size="md"
@@ -210,7 +210,7 @@ const HeaderWithSearchWrapper = ({
               placeholder={searchPlaceholder}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              iconLeading={<Search size={16} />}
+              iconLeading={<Search />}
               ariaLabel="Search"
             />
           </div>
@@ -305,7 +305,7 @@ export const MinimalSearch: Story = {
               placeholder="Search anything..."
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              iconLeading={<Search size={16} />}
+              iconLeading={<Search />}
               ariaLabel="Search"
             />
           </div>

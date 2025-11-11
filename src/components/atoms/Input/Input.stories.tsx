@@ -84,7 +84,7 @@ Tokens follow a three-tier hierarchy:
 // With search icon
 <Input 
   placeholder="Search..." 
-  iconLeading={<Search size={16} />}
+  iconLeading={<Search />}
 />
 
 // Controlled input
@@ -92,7 +92,7 @@ Tokens follow a three-tier hierarchy:
   value={value}
   onChange={(e) => setValue(e.target.value)}
   placeholder="Email"
-  iconLeading={<Mail size={16} />}
+  iconLeading={<Mail />}
 />
 \\\`\\\`\\\`
 
@@ -285,7 +285,7 @@ export const WithIcons: Story = {
           placeholder="Search..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          iconLeading={<Search size={16} />}
+          iconLeading={<Search />}
           ariaLabel="Search"
         />
         <Input
@@ -293,7 +293,7 @@ export const WithIcons: Story = {
           type="email"
           value={emailValue}
           onChange={(e) => setEmailValue(e.target.value)}
-          iconLeading={<Mail size={16} />}
+          iconLeading={<Mail />}
           ariaLabel="Email"
         />
         <Input
@@ -301,7 +301,7 @@ export const WithIcons: Story = {
           type="password"
           value={passwordValue}
           onChange={(e) => setPasswordValue(e.target.value)}
-          iconLeading={<Lock size={16} />}
+          iconLeading={<Lock />}
           ariaLabel="Password"
         />
         <Input
@@ -322,7 +322,7 @@ export const WithIcons: Story = {
                 }}
                 aria-label="Clear"
               >
-                <X size={16} />
+                <X />
               </button>
             ) : null
           }
@@ -391,7 +391,7 @@ export const WithPlaceholder: Story = {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-style-spacing-4px-4-16px)", width: "300px" }}>
         <Input placeholder="Enter your name..." />
-        <Input placeholder="Search for anything..." iconLeading={<Search size={16} />} />
+        <Input placeholder="Search for anything..." iconLeading={<Search />} />
         <Input placeholder="Type here..." />
       </div>
     );
@@ -411,7 +411,7 @@ export const FullWidth: Story = {
           placeholder="Full width input..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          iconLeading={<Search size={16} />}
+          iconLeading={<Search />}
         />
       </div>
     );
@@ -430,7 +430,7 @@ export const WithLabelAndCharacterCount: Story = {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           maxLength={20}
-          iconLeading={<User size={16} />}
+          iconLeading={<User />}
         />
       </div>
     );
@@ -452,7 +452,7 @@ export const InputStates: Story = {
           value={defaultValue}
           onChange={(e) => setDefaultValue(e.target.value)}
           maxLength={20}
-          iconLeading={<User size={16} />}
+          iconLeading={<User />}
           state="default"
         />
         <Input
@@ -461,7 +461,7 @@ export const InputStates: Story = {
           value={emptyValue}
           onChange={(e) => setEmptyValue(e.target.value)}
           maxLength={20}
-          iconLeading={<User size={16} />}
+          iconLeading={<User />}
           state="default"
         />
         <Input
@@ -470,7 +470,7 @@ export const InputStates: Story = {
           value={errorValue}
           onChange={(e) => setErrorValue(e.target.value)}
           maxLength={20}
-          iconLeading={<User size={16} />}
+          iconLeading={<User />}
           state="error"
         />
         <Input
@@ -479,8 +479,8 @@ export const InputStates: Story = {
           value={successValue}
           onChange={(e) => setSuccessValue(e.target.value)}
           maxLength={20}
-          iconLeading={<User size={16} />}
-          iconTrailing={<Check size={16} />}
+          iconLeading={<User />}
+          iconTrailing={<Check />}
           state="success"
         />
       </div>
@@ -534,7 +534,7 @@ export const AllVariations: Story = {
               placeholder="With search icon"
               value={smValue}
               onChange={(e) => setSmValue(e.target.value)}
-              iconLeading={<Search size={16} />}
+              iconLeading={<Search />}
             />
             <Input size="sm" placeholder="Disabled" disabled />
           </div>
@@ -555,7 +555,7 @@ export const AllVariations: Story = {
               placeholder="With search icon"
               value={mdValue}
               onChange={(e) => setMdValue(e.target.value)}
-              iconLeading={<Search size={16} />}
+              iconLeading={<Search />}
             />
             <Input size="md" placeholder="Disabled" disabled />
           </div>
@@ -576,7 +576,7 @@ export const AllVariations: Story = {
               placeholder="With search icon"
               value={lgValue}
               onChange={(e) => setLgValue(e.target.value)}
-              iconLeading={<Search size={16} />}
+              iconLeading={<Search />}
             />
             <Input size="lg" placeholder="Disabled" disabled />
           </div>

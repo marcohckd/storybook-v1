@@ -64,8 +64,8 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         size={size}
-        iconLeading={<Search size={16} />}
-        iconTrailing={value ? <X size={16} onClick={handleClear} style={{ cursor: "pointer" }} /> : undefined}
+        iconLeading={<Search />}
+        iconTrailing={value ? <X onClick={handleClear} style={{ cursor: "pointer" }} /> : undefined}
         ariaLabel={placeholder}
         {...rest}
       />

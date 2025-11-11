@@ -57,10 +57,10 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  width: var(--spacing-style-spacing-4px-1-4px);
-  height: var(--spacing-style-spacing-4px-2-8px);
+  width: calc(var(--icon-size-xs) * 0.25);
+  height: calc(var(--icon-size-xs) * 0.5);
   border: solid var(--semantic-checkbox-checkmark, var(--semantic-text-primary));
-  border-width: 0 var(--spacing-style-spacing-4px-0-5-2px) var(--spacing-style-spacing-4px-0-5-2px) 0;
+  border-width: 0 var(--border-width-thin) var(--border-width-thin) 0;
   opacity: 0;
   pointer-events: none;
   z-index: calc(var(--z-index-base) + 1);

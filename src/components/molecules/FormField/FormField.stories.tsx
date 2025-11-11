@@ -82,7 +82,7 @@ export const WithIcon: Story = {
   args: {
     label: "Search",
     placeholder: "Search...",
-    iconLeading: <Search size={16} />,
+    iconLeading: <Search />,
   },
 };
 
@@ -109,7 +109,7 @@ export const FormComposition: Story = {
       <div style={{ maxWidth: "400px" }}>
         <Card>
           <CardHeader>
-            <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-lg)", fontWeight: "var(--font-weight-semibold)" }}>
+            <h3 style={{ margin: 0, fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-semibold)" }}>
               Create Account
             </h3>
           </CardHeader>

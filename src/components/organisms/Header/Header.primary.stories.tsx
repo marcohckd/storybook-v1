@@ -196,8 +196,8 @@ export const WithRightSlot: Story = {
     label: "Primary Header with Actions",
     rightSlot: (
       <>
-        <Settings size={16} />
-        <X size={16} />
+        <Settings />
+        <X />
       </>
     ),
   },

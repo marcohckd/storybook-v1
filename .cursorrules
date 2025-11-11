@@ -3,43 +3,283 @@
 ## Mission
 Turn our ARKEM Figma system into a React + Storybook library using ONLY tokens (no raw values). Components mirror Figma variants/sizes/states, are accessible, and ship with well-documented stories.
 
-## Tech
+## Tech Stack
 - React 18, TypeScript strict
 - Storybook (Vite)
-- Tokens as CSS variables
+- Tokens as CSS variables (`var(--token-name)`)
 - Icons: lucide-react
-- Optional: Tailwind (design authoring only)
+- Component primitives: Radix UI (where applicable)
 
-## Folders
+## Project Structure
+```
 src/
-  styles/                 # tokens.css + tokens-semantic.css
-  components/             # <Name>/<Name>.tsx + <Name>.stories.tsx
-  kepler/                 # Kepler shells & stories (mocked)
-.storybook/
+  styles/
+    tokens.css              # Raw token values (hex, px, etc.)
+    tokens-semantic.css     # Semantic tokens (references raw tokens)
+    global.css              # Global styles
+  components/
+    atoms/                  # Button, Input, Badge, Label, etc.
+    molecules/              # Card, Dropdown, Tabs, Panel, etc.
+    organisms/              # Table, Modal, Drawer, Header, etc.
+    pages/                  # Page-level components
+    templates/              # Template components
+    Foundations/            # Token showcase stories
+  tokenization/
+    TOKENIZATION_GUIDELINES.md  # Complete tokenization rules
+```
 
-## Ground Rules
-1) Never hardcode visual values. Use variables from:
-   - /src/styles/tokens.css
-   - /src/styles/tokens-semantic.css
-2) Each component:
-   - lives in `src/components/<Name>/`
-   - has typed props mapped to Figma variants
-   - includes focus-visible and ARIA
-   - ships `*.stories.tsx` with Controls for all props
-3) Storybook:
-   - `title: "Components/<Name>"`
-   - layout centered unless the pattern needs full width
-4) New visuals → propose a semantic token and add it to tokens-semantic.css, then refactor usage.
+## Core Principles
 
-## Atomic Discipline
-Atoms (Button, Input, Badge) → Molecules (Card, Modal) → Organisms (Table, Toolbar).
+### 1. Tokenization (CRITICAL)
+**Never hardcode visual values.** Always use tokens from:
+- `src/styles/tokens.css` (raw tokens)
+- `src/styles/tokens-semantic.css` (semantic tokens)
 
-## Cursor Prompt Pattern
-/vibe Create `src/components/<Name>/<Name>.tsx` implementing tokens-only styles, ARIA/focus-visible, typed props (match Figma), and `*.stories.tsx` with Controls and 3–5 example stories.
+**Must tokenize:**
+- ✅ Colors: `var(--semantic-background-base)`, `var(--semantic-text-primary)`
+- ✅ Spacing: `var(--spacing-8)`, `var(--spacing-style-spacing-4px-4-16px)`
+- ✅ Typography: `var(--fonts-semantic-md)`, `var(--fonts-semantic-md-line-height)`
+- ✅ Font weights: `var(--font-weight-medium)`
+- ✅ Letter spacing: `var(--letter-spacing-tight)`, `var(--letter-spacing-normal)`
+- ✅ Borders: `var(--semantic-border-subtle)`, `var(--border-width-thin)`
+- ✅ Radius: `var(--radius-md)`, `var(--radius-sm)`
+- ✅ Shadows: `var(--shadow-xs)`, `var(--shadow-skeuomorphic)`
+- ✅ Z-index: `var(--z-index-base)`, `var(--z-index-modal)`
+- ✅ Transitions: `var(--transition-base)`, `var(--transition-fast)`
+
+**Acceptable hardcoded (component-specific dimensions):**
+- Button heights: `32px` (sm), `40px` (md), `48px` (lg)
+- Icon sizes: `16px` (sm), `20px` (md), `24px` (lg)
+- Table row heights: `40px` (header), `48px` (body)
+- Modal dimensions: `max-width: 1000px`, `height: 700px`
+
+**Reference:** See `src/tokenization/TOKENIZATION_GUIDELINES.md` for complete rules.
+
+### 2. Typography Standards
+
+**Semantic Scale (UI Components):**
+- `--fonts-semantic-xs`: 12px / 16px (labels, metadata)
+- `--fonts-semantic-sm`: 14px / 20px (body text, subsection headings)
+- `--fonts-semantic-md`: 16px / 24px (section headings, card titles)
+- `--fonts-semantic-lg`: 18px / 24px (component content only)
+- `--fonts-semantic-xl`: 20px / 28px (component content only)
+
+**Display Scale (Headings):**
+- `--fonts-display-xs`: 24px / 32px
+- `--fonts-display-sm`: 30px / 38px
+- `--fonts-display-md`: 36px / 44px
+- `--fonts-display-lg`: 48px / 60px
+
+**Story Files Typography:**
+- Section headings (h3): `var(--fonts-semantic-md)` (16px)
+- Body text: `var(--fonts-semantic-sm)` (14px)
+- Labels: `var(--fonts-semantic-xs)` (12px)
+- Never use `--fonts-semantic-lg` or `--fonts-semantic-xl` in story UI
+
+**Ratios:** Line-height / font-size should be 1.1-1.5 for UI components, aligned to 4px baseline grid.
+
+### 3. Component Structure
+
+**File Organization:**
+```
+src/components/<Category>/<Name>/
+  <Name>.tsx              # Component implementation
+  <Name>.css              # Component styles (tokens only)
+  <Name>.stories.tsx      # Storybook stories
+  index.ts                # Exports
+```
+
+**Component Requirements:**
+- Typed props matching Figma variants/sizes/states
+- CSS using tokens only (no hardcoded values)
+- Focus-visible styles for keyboard navigation
+- ARIA attributes for accessibility
+- Data attributes for styling hooks (`data-size`, `data-state`, etc.)
+
+### 4. Storybook Standards
+
+**Story Structure:**
+- `title: "Components/<Category>/<Name>"` (e.g., `"Components/Atoms/Button"`)
+- `layout: "centered"` (default) or `"fullscreen"` for full-width patterns
+- `tags: ["autodocs"]` for automatic documentation
+- Comprehensive `argTypes` for all props
+- 3-5 example stories showing variants/states
+
+**Story File Patterns:**
+- Use tokens in inline styles: `style={{ padding: "var(--spacing-8)" }}`
+- Standard container spacing: `var(--spacing-20)` or `var(--spacing-16)`
+- Navigation menu pattern: `gap: "var(--spacing-style-spacing-4px-1-4px)"` (4px between items)
+- Follow "Standard Font Size Patterns for Stories" from tokenization guidelines
+
+**Documentation:**
+- Include token reference tables in story docs
+- Document all props with descriptions
+- Show usage examples
+- Include accessibility notes
+
+### 5. Standard Component Patterns
+
+**Navigation Menu / List Item Pattern:**
+```css
+/* Container */
+gap: var(--spacing-style-spacing-4px-1-4px); /* 4px between items */
+
+/* Item */
+gap: var(--spacing-12); /* 12px between icon and text */
+padding: var(--spacing-8) var(--spacing-12); /* 8px vertical, 12px horizontal */
+border-radius: var(--radius-md); /* 8px */
+```
+
+**Button Sizes:**
+- `sm`: 32px height, `--fonts-semantic-md` (16px)
+- `md`: 40px height, `--fonts-semantic-md` (16px)
+- `lg`: 48px height, `--fonts-semantic-lg` (18px)
+
+**Input Sizes:**
+- `sm`: 32px height, `--fonts-semantic-sm` (14px)
+- `md`: 40px height, `--fonts-semantic-md` (16px)
+- `lg`: 48px height, `--fonts-semantic-lg` (18px)
+
+### 6. Accessibility Requirements
+
+**Required:**
+- `focus-visible` styles for all interactive elements
+- ARIA labels via `ariaLabel` prop
+- Keyboard navigation support
+- Screen reader announcements for state changes
+- Proper semantic HTML (buttons, inputs, etc.)
+
+**Focus Ring:**
+- Use `var(--semantic-focus-ring)` for focus indicators
+- 3px offset: `box-shadow: 0 0 0 3px var(--semantic-focus-ring)`
+
+### 7. Atomic Design Discipline
+
+**Atoms** (standalone, no dependencies):
+- Button, Input, Label, Badge, Checkbox, Radio, Switch, Avatar, Tooltip, Divider, Link, Spinner, Scrollbar, Slider, Textarea
+
+**Molecules** (compose atoms):
+- Card, Dropdown, Tabs, Panel, FormField, SearchBox, NavMenu
+
+**Organisms** (compose molecules + atoms):
+- Table, Modal, Drawer, Header
+
+**Pages** (full page compositions):
+- UserManagementTable
+
+**Templates** (reusable layouts):
+- DataTable
+
+### 8. TypeScript Standards
+
+**Props Interface:**
+```typescript
+export interface ComponentProps {
+  /** Description of prop */
+  propName?: "variant1" | "variant2";
+  /** Additional CSS class name */
+  className?: string;
+  /** ARIA label for accessibility */
+  ariaLabel?: string;
+}
+```
+
+**Required:**
+- Strict TypeScript
+- Typed props matching Figma variants
+- Sensible defaults
+- JSDoc comments on prop interfaces (recommended)
+
+### 9. CSS Patterns
+
+**Data Attributes for Styling:**
+```css
+[data-size="sm"] { /* styles */ }
+[data-state="hover"] { /* styles */ }
+[data-hierarchy="primary"] { /* styles */ }
+```
+
+**State Management:**
+- Use data attributes, not classes for state
+- Combine with `:hover`, `:focus-visible`, `:disabled` pseudo-classes
+- Use `data-forced-state` for Storybook visual testing
+
+**Transitions:**
+- Always use transition tokens: `var(--transition-base)`
+- Apply to all interactive properties (color, background, border, etc.)
+
+### 10. Common Patterns
+
+**Icon + Text Layout:**
+```css
+display: flex;
+align-items: center;
+gap: var(--spacing-12); /* 12px between icon and text */
+```
+
+**Container Padding:**
+- Standard: `var(--spacing-16)` or `var(--spacing-20)`
+- Tight: `var(--spacing-8)` or `var(--spacing-12)`
+
+**Border Patterns:**
+- Subtle: `var(--semantic-border-subtle)`
+- Strong: `var(--semantic-border-strong)`
+- Width: `var(--border-width-thin)` (1px) or `var(--border-width-medium)` (2px)
 
 ## Acceptance Checklist
-- [ ] Tokens only (no hex, px literals if a token exists)
-- [ ] Variants & sizes match Figma names
-- [ ] Accessible focus, keyboard support
-- [ ] Stories render in isolation; Docs tab usable
-- [ ] Props typed, defaults sensible
+
+Before considering a component complete:
+
+- [ ] **Tokens only** - No hex, px, rem, em literals (except component-specific dimensions)
+- [ ] **Typography tokens** - All font-size, line-height, font-weight use tokens
+- [ ] **Spacing tokens** - All padding, margin, gap use tokens
+- [ ] **Color tokens** - All colors use semantic tokens
+- [ ] **Variants match Figma** - Size/variant names match design system
+- [ ] **Accessible** - Focus-visible, ARIA, keyboard navigation
+- [ ] **Stories complete** - 3-5 examples, argTypes, token docs
+- [ ] **Props typed** - TypeScript interfaces with sensible defaults
+- [ ] **Data attributes** - Use data-* for styling hooks, not classes
+- [ ] **Transitions** - All interactive states use transition tokens
+
+## Quick Reference
+
+**Token Files:**
+- `src/styles/tokens.css` - Raw values
+- `src/styles/tokens-semantic.css` - Semantic tokens
+- `src/tokenization/TOKENIZATION_GUIDELINES.md` - Complete rules
+
+**Audit Reports:**
+- `audits/COMPONENT_CONSISTENCY_AUDIT_REPORT.md` - Component audit
+- `audits/DEVHANDOFF_AUDIT_REPORT.md` - Handoff readiness
+- `audits/STORYBOOK_DOCUMENTATION_AUDIT_REPORT.md` - Documentation audit
+
+**Common Commands:**
+```bash
+npm run storybook          # Start Storybook
+npm run test               # Run tests
+npm run test:coverage      # Test coverage
+```
+
+## Cursor Prompt Pattern
+
+When creating a new component:
+```
+Create `src/components/<Category>/<Name>/<Name>.tsx` implementing:
+- Tokens-only styles (no hardcoded values)
+- Typed props matching Figma variants
+- ARIA/focus-visible for accessibility
+- Data attributes for styling hooks
+- `*.stories.tsx` with Controls, argTypes, and 3-5 example stories
+- Token reference documentation in story docs
+```
+
+## Anti-Patterns (Don't Do This)
+
+❌ `font-size: 16px` → ✅ `font-size: var(--fonts-semantic-md)`  
+❌ `padding: 8px` → ✅ `padding: var(--spacing-8)`  
+❌ `color: #e5e5e5` → ✅ `color: var(--semantic-text-primary)`  
+❌ `border-radius: 8px` → ✅ `border-radius: var(--radius-md)`  
+❌ `z-index: 1000` → ✅ `z-index: var(--z-index-modal)`  
+❌ `transition: 0.15s ease` → ✅ `transition: var(--transition-base)`  
+❌ Hardcoded typography in story files → ✅ Use semantic tokens  
+❌ Using classes for state → ✅ Use data attributes  

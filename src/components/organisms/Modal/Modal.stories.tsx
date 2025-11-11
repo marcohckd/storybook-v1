@@ -700,7 +700,7 @@ export const LongContent: Story = {
                 >
                   <h4
                     style={{
-                      fontSize: "var(--fonts-semantic-md)",
+                      fontSize: "var(--fonts-semantic-sm)",
                       fontWeight: "var(--font-weight-medium)",
                       color: "var(--semantic-text-primary)",
                       margin: "0 0 var(--spacing-8) 0",

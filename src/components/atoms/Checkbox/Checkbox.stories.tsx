@@ -88,7 +88,9 @@ Tokens follow a three-tier hierarchy:
 
 | Property | Semantic Token | Primitive Token | Value |
 |----------|---------------|-----------------|--------|
-| Checkmark | \`--semantic-text-primary\` | \`--color-text-primary\` | #E5E5E5 |
+| Checkmark Color | \`--semantic-text-primary\` | \`--color-text-primary\` | #E5E5E5 |
+| Checkmark Size | \`--icon-size-xs\` | — | 12px (checkmark: 3px × 6px) |
+| Checkmark Border | \`--border-width-thin\` | — | 1px |
 | Border | \`--semantic-border-muted\` | — | #212121 |
 | Background | \`--semantic-background-base\` | — | #080808 |
 | Hover Background | \`--semantic-background-interactive\` | — | #5A5A5A |
@@ -101,6 +103,8 @@ Tokens follow a three-tier hierarchy:
 - \`--semantic-background-base\`: Background color
 - \`--semantic-background-interactive\`: Hover background
 - \`--semantic-focus-ring\`: Focus indicator
+- \`--icon-size-xs\`: Checkmark size reference (12px) - checkmark dimensions calculated proportionally
+- \`--border-width-thin\`: Checkmark border width (1px)
 
 **Note**: Always provide an \`aria-label\` for accessibility, especially in table contexts.`,
       },

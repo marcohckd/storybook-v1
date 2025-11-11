@@ -276,7 +276,7 @@ export const InteractiveStates: Story = {
         <h3
           style={{
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-lg)",
+            fontSize: "var(--fonts-semantic-md)",
             fontWeight: "var(--font-weight-semibold)",
             margin: "0 0 var(--spacing-8) 0",
           }}
@@ -389,7 +389,7 @@ export const LongContent: Story = {
                 <h4
                   style={{
                     color: "var(--semantic-text-primary)",
-                    fontSize: "var(--fonts-semantic-md)",
+                    fontSize: "var(--fonts-semantic-sm)",
                     fontWeight: "var(--font-weight-medium)",
                     margin: "0 0 var(--spacing-8) 0",
                   }}
@@ -570,7 +570,7 @@ export const AccessibilityExample: Story = {
                 <h4
                   style={{
                     color: "var(--semantic-text-primary)",
-                    fontSize: "var(--fonts-semantic-md)",
+                    fontSize: "var(--fonts-semantic-sm)",
                     fontWeight: "var(--font-weight-medium)",
                     margin: "0 0 var(--spacing-8) 0",
                   }}

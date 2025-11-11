@@ -75,10 +75,11 @@ export const Input: React.FC<InputProps> = ({
 
   const inputElement = (
     <div
-      className={hasLabelOrCount ? "arkem-input-wrapper" : ""}
+      className="arkem-input-wrapper"
       data-has-leading={iconLeading ? "true" : "false"}
       data-has-trailing={iconTrailing ? "true" : "false"}
       data-state={state}
+      data-size={size}
     >
       {iconLeading && (
         <span className="arkem-input__icon arkem-input__icon--leading" aria-hidden="true">

@@ -4,6 +4,24 @@ import "../src/styles/tokens.css";
 import "../src/styles/tokens-semantic.css";
 import "../src/styles/global.css";
 
+// Custom ARKEM dark theme for Storybook UI
+const arkemDarkTheme = {
+  ...themes.dark,
+  appBg: "#080808", /* --semantic-background-base */
+  appContentBg: "#080808", /* --semantic-background-base */
+  textColor: "#e5e5e5", /* --semantic-text-primary */
+  textInverseColor: "#080808", /* --semantic-text-inverse */
+  barTextColor: "#e5e5e5", /* --semantic-text-primary */
+  barSelectedColor: "#e0dd5b", /* --semantic-brand-base */
+  barBg: "#8a8a8a", /* --semantic-background-raised */
+  inputBg: "#5a5a5a", /* --semantic-background-interactive */
+  inputBorder: "#2d2d2d", /* --semantic-border-subtle */
+  inputTextColor: "#e5e5e5", /* --semantic-text-primary */
+  textMutedColor: "#838383", /* --semantic-text-secondary */
+  fontBase: "var(--font-family-base)",
+  fontCode: "monospace",
+};
+
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -32,22 +50,29 @@ const preview: Preview = {
     },
     layout: "centered",
     docs: {
-      theme: {
-        ...themes.dark,
-        appBg: "#080808", /* --semantic-background-base */
-        appContentBg: "#080808", /* --semantic-background-base */
-        textColor: "#e5e5e5", /* --semantic-text-primary */
-        textInverseColor: "#080808", /* --semantic-text-inverse */
-        barTextColor: "#e5e5e5", /* --semantic-text-primary */
-        barSelectedColor: "#e0dd5b", /* --semantic-brand-base */
-        barBg: "#8a8a8a", /* --semantic-background-raised */
-        inputBg: "#5a5a5a", /* --semantic-background-interactive */
-        inputBorder: "#2d2d2d", /* --semantic-border-subtle */
-        inputTextColor: "#e5e5e5", /* --semantic-text-primary */
-        textMutedColor: "#838383", /* --semantic-text-secondary */
-        fontBase: "var(--font-family-base)",
-        fontCode: "monospace",
-      },
+      theme: arkemDarkTheme,
+    },
+    // Theme switching configuration for Storybook UI
+    // Note: Component-level theme switching can be added later if needed
+    themes: {
+      default: "arkem-dark",
+      list: [
+        {
+          name: "arkem-dark",
+          class: "theme-arkem-dark",
+          color: "#080808",
+        },
+        {
+          name: "light",
+          class: "theme-light",
+          color: "#ffffff",
+        },
+        {
+          name: "dark",
+          class: "theme-dark",
+          color: "#121212",
+        },
+      ],
     },
     a11y: {
       // 'todo' - show a11y violations in the test UI only

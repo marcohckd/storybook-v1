@@ -62,7 +62,7 @@ const [enabled, setEnabled] = useState(false);
 // In settings context (like ModuleAccessTab)
 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
   <div>
-    <div style={{ fontSize: "var(--fonts-semantic-md)", fontWeight: "var(--font-weight-medium)" }}>
+    <div style={{ fontSize: "var(--fonts-semantic-sm)", fontWeight: "var(--font-weight-medium)" }}>
       Module Name
     </div>
     <div style={{ fontSize: "var(--fonts-semantic-sm)", color: "var(--semantic-text-secondary)" }}>
@@ -303,7 +303,7 @@ export const InSettingsContext: Story = {
             <div style={{ paddingRight: "var(--spacing-16)", flex: 1 }}>
               <div
                 style={{
-                  fontSize: "var(--fonts-semantic-md)",
+                  fontSize: "var(--fonts-semantic-sm)",
                   fontWeight: "var(--font-weight-medium)",
                   color: "var(--semantic-text-primary)",
                   marginBottom: "var(--spacing-style-spacing-4px-0-5-2px)",

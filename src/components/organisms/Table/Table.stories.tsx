@@ -379,7 +379,7 @@ export const EmptyState: Story = {
               >
                 <p
                   style={{
-                    fontSize: "var(--fonts-semantic-md)",
+                    fontSize: "var(--fonts-semantic-sm)",
                     color: "var(--semantic-text-secondary)",
                     margin: 0,
                   }}

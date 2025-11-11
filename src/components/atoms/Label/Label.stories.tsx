@@ -126,7 +126,7 @@ export const WithInput: Story = {
           border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
           borderRadius: "var(--radius-xs)",
           color: "var(--semantic-text-primary)",
-          fontSize: "var(--fonts-semantic-md)",
+          fontSize: "var(--fonts-semantic-sm)",
         }}
       />
     </div>
@@ -148,7 +148,7 @@ export const MultipleLabels: Story = {
             border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
       </div>
@@ -163,7 +163,7 @@ export const MultipleLabels: Story = {
             border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
       </div>
@@ -190,7 +190,7 @@ export const RequiredIndicator: Story = {
             border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
       </div>
@@ -210,7 +210,7 @@ export const RequiredIndicator: Story = {
             border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
       </div>
@@ -239,7 +239,7 @@ export const ErrorState: Story = {
             border: "var(--border-width-thin) solid var(--semantic-text-error)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
         <span
@@ -323,7 +323,7 @@ export const AccessibilityExample: Story = {
             border: "var(--border-width-thin) solid var(--semantic-border-subtle)",
             borderRadius: "var(--radius-xs)",
             color: "var(--semantic-text-primary)",
-            fontSize: "var(--fonts-semantic-md)",
+            fontSize: "var(--fonts-semantic-sm)",
           }}
         />
         <span

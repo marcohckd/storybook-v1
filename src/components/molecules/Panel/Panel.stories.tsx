@@ -295,7 +295,7 @@ export const Default: Story = {
       <div>
         <h3
           style={{
-            fontSize: "var(--fonts-semantic-lg)",
+            fontSize: "var(--fonts-semantic-md)",
             fontWeight: "var(--font-weight-medium)",
             lineHeight: "var(--fonts-semantic-lg-line-height)",
             fontFamily: "var(--font-family-base)",
@@ -307,8 +307,8 @@ export const Default: Story = {
         </h3>
         <p
           style={{
-            fontSize: "var(--fonts-semantic-md)",
-            lineHeight: "var(--fonts-semantic-md-line-height)",
+            fontSize: "var(--fonts-semantic-sm)",
+            lineHeight: "var(--fonts-semantic-sm-line-height)",
             fontFamily: "var(--font-family-base)",
             color: "var(--semantic-text-secondary)",
             margin: 0,
@@ -328,7 +328,7 @@ export const WithInnerShadow: Story = {
       <div>
         <h3
           style={{
-            fontSize: "var(--fonts-semantic-lg)",
+            fontSize: "var(--fonts-semantic-md)",
             fontWeight: "var(--font-weight-medium)",
             lineHeight: "var(--fonts-semantic-lg-line-height)",
             fontFamily: "var(--font-family-base)",
@@ -340,8 +340,8 @@ export const WithInnerShadow: Story = {
         </h3>
         <p
           style={{
-            fontSize: "var(--fonts-semantic-md)",
-            lineHeight: "var(--fonts-semantic-md-line-height)",
+            fontSize: "var(--fonts-semantic-sm)",
+            lineHeight: "var(--fonts-semantic-sm-line-height)",
             fontFamily: "var(--font-family-base)",
             color: "var(--semantic-text-secondary)",
             marginBottom: "var(--spacing-8, 8px)",
@@ -351,8 +351,8 @@ export const WithInnerShadow: Story = {
         </p>
         <p
           style={{
-            fontSize: "var(--fonts-semantic-md)",
-            lineHeight: "var(--fonts-semantic-md-line-height)",
+            fontSize: "var(--fonts-semantic-sm)",
+            lineHeight: "var(--fonts-semantic-sm-line-height)",
             fontFamily: "var(--font-family-base)",
             color: "var(--semantic-text-secondary)",
             margin: 0,
@@ -381,7 +381,7 @@ export const Comparison: Story = {
           <div>
             <h3
               style={{
-                fontSize: "var(--fonts-semantic-lg)",
+                fontSize: "var(--fonts-semantic-md)",
                 fontWeight: "var(--font-weight-medium)",
                 lineHeight: "var(--fonts-semantic-lg-line-height)",
                 fontFamily: "var(--font-family-base)",
@@ -391,15 +391,15 @@ export const Comparison: Story = {
             >
               Without Shadow
             </h3>
-            <p
-              style={{
-                fontSize: "var(--fonts-semantic-md)",
-                lineHeight: "var(--fonts-semantic-md-line-height)",
-                fontFamily: "var(--font-family-base)",
-                color: "var(--semantic-text-secondary)",
-                margin: 0,
-              }}
-            >
+        <p
+          style={{
+            fontSize: "var(--fonts-semantic-sm)",
+            lineHeight: "var(--fonts-semantic-sm-line-height)",
+            fontFamily: "var(--font-family-base)",
+            color: "var(--semantic-text-secondary)",
+            margin: 0,
+          }}
+        >
               Standard panel appearance with border and background.
             </p>
           </div>
@@ -408,7 +408,7 @@ export const Comparison: Story = {
           <div>
             <h3
               style={{
-                fontSize: "var(--fonts-semantic-lg)",
+                fontSize: "var(--fonts-semantic-md)",
                 fontWeight: "var(--font-weight-medium)",
                 lineHeight: "var(--fonts-semantic-lg-line-height)",
                 fontFamily: "var(--font-family-base)",
@@ -418,15 +418,15 @@ export const Comparison: Story = {
             >
               With Inner Shadow
             </h3>
-            <p
-              style={{
-                fontSize: "var(--fonts-semantic-md)",
-                lineHeight: "var(--fonts-semantic-md-line-height)",
-                fontFamily: "var(--font-family-base)",
-                color: "var(--semantic-text-secondary)",
-                margin: 0,
-              }}
-            >
+        <p
+          style={{
+            fontSize: "var(--fonts-semantic-sm)",
+            lineHeight: "var(--fonts-semantic-sm-line-height)",
+            fontFamily: "var(--font-family-base)",
+            color: "var(--semantic-text-secondary)",
+            margin: 0,
+          }}
+        >
               Enhanced with brand-colored inner shadow for depth.
             </p>
           </div>
@@ -445,7 +445,7 @@ export const LargeContent: Story = {
       <div>
         <h3
           style={{
-            fontSize: "var(--fonts-semantic-lg)",
+            fontSize: "var(--fonts-semantic-md)",
             fontWeight: "var(--font-weight-medium)",
             lineHeight: "var(--fonts-semantic-lg-line-height)",
             fontFamily: "var(--font-family-base)",
@@ -466,8 +466,8 @@ export const LargeContent: Story = {
             <p
               key={i}
               style={{
-                fontSize: "var(--fonts-semantic-md)",
-                lineHeight: "var(--fonts-semantic-md-line-height)",
+                fontSize: "var(--fonts-semantic-sm)",
+                lineHeight: "var(--fonts-semantic-sm-line-height)",
                 fontFamily: "var(--font-family-base)",
                 color: "var(--semantic-text-secondary)",
                 margin: 0,
@@ -506,7 +506,7 @@ export const WithForm: Story = {
           <div>
             <h3
               style={{
-                fontSize: "var(--fonts-semantic-lg)",
+                fontSize: "var(--fonts-semantic-md)",
                 fontWeight: "var(--font-weight-medium)",
                 color: "var(--semantic-text-primary)",
                 marginBottom: "var(--spacing-16)",

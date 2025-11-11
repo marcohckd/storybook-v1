@@ -68,6 +68,22 @@
   transition: transform var(--transition-base);
 }
 
+.arkem-dropdown__icon svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  color: currentColor;
+}
+
+.arkem-dropdown--md .arkem-dropdown__icon svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+.arkem-dropdown--lg .arkem-dropdown__icon svg {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
 .arkem-dropdown__icon--open {
   transform: rotate(180deg);
 }

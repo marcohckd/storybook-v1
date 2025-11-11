@@ -1,0 +1,90 @@
+/* === SWITCH ROOT (TRACK) === */
+.arkem-switch {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: var(--spacing-style-spacing-4px-5-20px);
+  height: var(--spacing-style-spacing-4px-3-12px);
+  background: var(--semantic-background-base);
+  border: var(--border-width-thin) solid var(--semantic-border-subtle);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+  outline: none;
+}
+
+.arkem-switch:hover:not(:disabled) {
+  background: var(--semantic-background-muted);
+  border-color: var(--semantic-border-subtle);
+}
+
+.arkem-switch[data-state="checked"] {
+  background: var(--semantic-background-interactive);
+  border-color: var(--semantic-background-interactive);
+}
+
+.arkem-switch[data-state="checked"]:hover:not(:disabled) {
+  background: var(--semantic-background-interactive);
+  border-color: var(--semantic-background-interactive);
+}
+
+.arkem-switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--semantic-focus-ring);
+}
+
+.arkem-switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* === SWITCH THUMB === */
+.arkem-switch__thumb {
+  display: block;
+  width: var(--spacing-style-spacing-4px-2-8px);
+  height: var(--spacing-style-spacing-4px-2-8px);
+  background: var(--semantic-text-primary);
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-base);
+  transform: translateX(2px);
+  will-change: transform;
+}
+
+.arkem-switch[data-state="checked"] .arkem-switch__thumb {
+  transform: translateX(calc(var(--spacing-style-spacing-4px-5-20px) - var(--spacing-style-spacing-4px-2-8px) - 2px));
+}
+
+/* === SIZE VARIANTS === */
+
+/* Default size (already defined above) */
+.arkem-switch--default {
+  width: var(--spacing-style-spacing-4px-5-20px);
+  height: var(--spacing-style-spacing-4px-3-12px);
+}
+
+.arkem-switch--default .arkem-switch__thumb {
+  width: var(--spacing-style-spacing-4px-2-8px);
+  height: var(--spacing-style-spacing-4px-2-8px);
+}
+
+.arkem-switch--default[data-state="checked"] .arkem-switch__thumb {
+  transform: translateX(calc(var(--spacing-style-spacing-4px-5-20px) - var(--spacing-style-spacing-4px-2-8px) - 2px));
+}
+
+/* Small size */
+.arkem-switch--sm {
+  width: var(--spacing-style-spacing-4px-4-16px);
+  height: var(--spacing-style-spacing-4px-2-8px);
+}
+
+.arkem-switch--sm .arkem-switch__thumb {
+  width: var(--spacing-style-spacing-4px-1-4px);
+  height: var(--spacing-style-spacing-4px-1-4px);
+}
+
+.arkem-switch--sm[data-state="checked"] .arkem-switch__thumb {
+  transform: translateX(calc(var(--spacing-style-spacing-4px-4-16px) - var(--spacing-style-spacing-4px-1-4px) - 2px));
+}
+

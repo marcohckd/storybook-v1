@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Button Snapshots matches snapshot for button with icons 1`] = `
+<button
+  class="arkem-btn"
+  data-has-leading="true"
+  data-has-trailing="false"
+  data-hierarchy="secondary"
+  data-size="md"
+  data-tone="grey"
+  type="button"
+>
+  <span
+    aria-hidden="true"
+    class="arkem-btn__icon arkem-btn__icon--lead"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-plus"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 12h14"
+      />
+      <path
+        d="M12 5v14"
+      />
+    </svg>
+  </span>
+  <span
+    class="arkem-btn__label"
+  >
+    Button with Icons
+  </span>
+</button>
+`;
+
+exports[`Button Snapshots matches snapshot for default button 1`] = `
+<button
+  class="arkem-btn"
+  data-has-leading="false"
+  data-has-trailing="false"
+  data-hierarchy="secondary"
+  data-size="md"
+  data-tone="grey"
+  type="button"
+>
+  <span
+    class="arkem-btn__label"
+  >
+    Default Button
+  </span>
+</button>
+`;
+
+exports[`Button Snapshots matches snapshot for disabled button 1`] = `
+<button
+  aria-disabled="true"
+  class="arkem-btn"
+  data-disabled="true"
+  data-has-leading="false"
+  data-has-trailing="false"
+  data-hierarchy="secondary"
+  data-size="md"
+  data-tone="grey"
+  disabled=""
+  type="button"
+>
+  <span
+    class="arkem-btn__label"
+  >
+    Disabled Button
+  </span>
+</button>
+`;
+
+exports[`Button Snapshots matches snapshot for icon-only button 1`] = `
+<button
+  aria-label="Add"
+  class="arkem-btn"
+  data-has-leading="true"
+  data-has-trailing="false"
+  data-hierarchy="secondary"
+  data-icon-only="true"
+  data-size="md"
+  data-tone="grey"
+  type="button"
+>
+  <span
+    aria-hidden="true"
+    class="arkem-btn__icon arkem-btn__icon--lead"
+  >
+    <svg
+      aria-hidden="true"
+      class="lucide lucide-plus"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 12h14"
+      />
+      <path
+        d="M12 5v14"
+      />
+    </svg>
+  </span>
+</button>
+`;
+
+exports[`Button Snapshots matches snapshot for primary button 1`] = `
+<button
+  class="arkem-btn"
+  data-has-leading="false"
+  data-has-trailing="false"
+  data-hierarchy="primary"
+  data-size="lg"
+  data-tone="grey"
+  type="button"
+>
+  <span
+    class="arkem-btn__label"
+  >
+    Primary Button
+  </span>
+</button>
+`;

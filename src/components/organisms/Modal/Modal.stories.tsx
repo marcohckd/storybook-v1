@@ -4,6 +4,14 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import * as React from "react";
 import { createRoot } from "react-dom/client";
+import { 
+  Info, 
+  Clock, 
+  ShieldAlert,
+  ChevronRight,
+  AlertTriangle,
+  Smartphone
+} from "lucide-react";
 
 import { Button } from "../../atoms/Button/Button";
 
@@ -500,98 +508,115 @@ const populateDeviceInformation = (pane: Element) => {
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         {/* Sticky Header */}
         <div className="arkem-modal__pane-header">
+          <Info className="arkem-modal__pane-header-icon" size={16} />
           <span className="arkem-modal__pane-header-text">Device Information</span>
         </div>
 
-        {/* Tabs */}
-        <div style={{
+        {/* Content Container */}
+        <div style={{ 
+          flex: 1, 
+          minHeight: 0,
           display: 'flex',
-          borderBottom: 'var(--border-width-thin) solid var(--semantic-border-muted)',
-          background: 'var(--semantic-background-raised)'
+          flexDirection: 'column',
+          overflow: 'hidden'
         }}>
-          {tabs.map((tab, idx) => {
-            const [isHovered, setIsHovered] = React.useState(false);
-            const isActive = activeTab === tab;
-            
-            return (
+          {/* Tabs */}
+          <div style={{
+            display: 'flex',
+            borderBottom: 'var(--border-width-thin) solid var(--semantic-border-muted)',
+            background: 'var(--semantic-background-raised)',
+            flexShrink: 0
+          }}>
+            {tabs.map((tab, idx) => {
+              const [isHovered, setIsHovered] = React.useState(false);
+              const isActive = activeTab === tab;
+              
+              return (
+                <div
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                  style={{
+                    flex: 1,
+                    height: '44px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 'var(--fonts-semantic-xs)',
+                    color: isActive 
+                      ? 'var(--semantic-text-primary)' 
+                      : isHovered 
+                        ? 'var(--semantic-text-hover)' 
+                        : 'var(--semantic-text-secondary)',
+                    background: isActive 
+                      ? 'var(--semantic-background-raised)' 
+                      : isHovered 
+                        ? 'var(--semantic-background-action-hover)' 
+                        : 'var(--semantic-background-base)',
+                    borderRight: idx < tabs.length - 1 
+                      ? 'var(--border-widths-mode-1-border-width-hairline) solid var(--semantic-border-muted)' 
+                      : 'none',
+                    cursor: 'pointer',
+                    transition: 'color var(--transition-fast), background var(--transition-fast)',
+                    fontWeight: isActive 
+                      ? 'var(--font-weight-medium)' 
+                      : 'var(--font-weight-regular)'
+                  }}
+                >
+                  {tab}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Tab Content - Metric rows */}
+          <div style={{ 
+            background: 'var(--semantic-background-raised)',
+            flex: 1, 
+            minHeight: 0,
+            overflowY: 'auto',
+            overflowX: 'hidden'
+          }}>
+            {tabContent[activeTab].map((metric, idx) => (
               <div
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                key={idx}
                 style={{
-                  flex: 1,
-                  height: '44px',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 'var(--fonts-semantic-xs)',
-                  color: isActive 
-                    ? 'var(--semantic-text-primary)' 
-                    : isHovered 
-                      ? 'var(--semantic-text-hover)' 
-                      : 'var(--semantic-text-secondary)',
-                  background: isActive 
-                    ? 'var(--semantic-background-raised)' 
-                    : isHovered 
-                      ? 'var(--semantic-background-action-hover)' 
-                      : 'var(--semantic-background-base)',
-                  borderRight: idx < tabs.length - 1 
+                  minHeight: '42px',
+                  borderBottom: idx < tabContent[activeTab].length - 1 
                     ? 'var(--border-widths-mode-1-border-width-hairline) solid var(--semantic-border-muted)' 
-                    : 'none',
-                  cursor: 'pointer',
-                  transition: 'color var(--transition-fast), background var(--transition-fast)',
-                  fontWeight: isActive 
-                    ? 'var(--font-weight-medium)' 
-                    : 'var(--font-weight-regular)'
+                    : 'none'
                 }}
               >
-                {tab}
+                <div style={{
+                  width: '100px',
+                  padding: 'var(--spacing-style-spacing-4px-3-12px) var(--spacing-style-spacing-4px-4-16px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  fontSize: 'var(--fonts-semantic-xs)',
+                  color: 'var(--semantic-text-secondary)',
+                  textTransform: 'uppercase'
+                }}>
+                  {metric.label}
+                </div>
+                <div style={{
+                  flex: 1,
+                  padding: 'var(--spacing-style-spacing-4px-3-12px) var(--spacing-style-spacing-4px-4-16px)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  fontSize: 'var(--fonts-semantic-xs)',
+                  color: metric.error 
+                    ? 'var(--semantic-feedback-error-base)' 
+                    : 'var(--semantic-text-primary)',
+                  textTransform: 'uppercase'
+                }}>
+                  {metric.value}
+                </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Tab Content - Metric rows */}
-        <div style={{ background: 'var(--semantic-background-raised)' }}>
-          {tabContent[activeTab].map((metric, idx) => (
-            <div
-              key={idx}
-              style={{
-                display: 'flex',
-                height: '42px',
-                borderBottom: idx < tabContent[activeTab].length - 1 
-                  ? 'var(--border-widths-mode-1-border-width-hairline) solid var(--semantic-border-muted)' 
-                  : 'none'
-              }}
-            >
-              <div style={{
-                width: '100px',
-                padding: 'var(--spacing-style-spacing-4px-3-12px) var(--spacing-style-spacing-4px-4-16px)',
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: 'var(--fonts-semantic-xs)',
-                color: 'var(--semantic-text-secondary)',
-                textTransform: 'uppercase'
-              }}>
-                {metric.label}
-              </div>
-              <div style={{
-                flex: 1,
-                padding: 'var(--spacing-style-spacing-4px-3-12px) var(--spacing-style-spacing-4px-4-16px)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                fontSize: 'var(--fonts-semantic-xs)',
-                color: metric.error 
-                  ? 'var(--semantic-feedback-error-base)' 
-                  : 'var(--semantic-text-primary)',
-                textTransform: 'uppercase'
-              }}>
-                {metric.value}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -617,6 +642,7 @@ const populateDeviceTimeline = (pane: Element) => {
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Sticky Header */}
       <div className="arkem-modal__pane-header">
+        <Clock className="arkem-modal__pane-header-icon" size={16} />
         <span className="arkem-modal__pane-header-text">Device Timeline</span>
         <span className="arkem-modal__pane-header-secondary">7 Observations</span>
       </div>
@@ -670,8 +696,20 @@ const populateEnrichmentData = (pane: Element) => {
       count: 4,
       threatLevel: 'critical',
       metrics: [
-        { label: 'THREAT SCORE:', value: '87/100 [HIGH]', critical: true },
-        { label: 'HONEYPOT:', value: 'YES ⚠️', critical: true },
+        { 
+          label: 'THREAT SCORE:', 
+          value: '87/100 [HIGH]', 
+          critical: true 
+        },
+        { 
+          label: 'HONEYPOT:', 
+          value: (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-4)' }}>
+              YES <AlertTriangle size={12} style={{ color: 'var(--semantic-feedback-warning-base)' }} />
+            </div>
+          ), 
+          critical: true 
+        },
         { label: 'HONEYPOT PROBABILITY:', value: '85%' },
         { label: 'MALWARE SAMPLES:', value: '15 detected' }
       ]
@@ -741,24 +779,27 @@ const populateEnrichmentData = (pane: Element) => {
   ];
 
   // Helper function to get color based on threat level
-  const getThreatLevelColor = (level?: string): string => {
-    // If no threat level specified, return default white color
-    if (!level) {
-      return 'var(--semantic-text-primary)'; // #E5E5E5 - White
+  const getThreatLevelColor = (level?: string, isExpanded?: boolean): string => {
+    // For threat-level sections, always use the threat color regardless of state
+    if (level) {
+      switch (level) {
+        case 'critical':
+          return 'var(--color-fill-feedback-error-500)'; // #9E4B4B - Red
+        case 'high':
+          return 'var(--color-fill-feedback-warning-500)'; // #A88940 - Orange
+        case 'medium':
+          return 'var(--semantic-brand-base)'; // #E0DD5B - Yellow
+        case 'low':
+          return 'var(--semantic-text-secondary)'; // #838383 - Grey
+        default:
+          return 'var(--semantic-text-primary)'; // #E5E5E5 - White
+      }
     }
     
-    switch (level) {
-      case 'critical':
-        return 'var(--color-fill-feedback-error-500)'; // #9E4B4B - Red
-      case 'high':
-        return 'var(--color-fill-feedback-warning-500)'; // #A88940 - Orange
-      case 'medium':
-        return 'var(--semantic-brand-base)'; // #E0DD5B - Yellow
-      case 'low':
-        return 'var(--semantic-text-secondary)'; // #838383 - Grey
-      default:
-        return 'var(--semantic-text-primary)'; // #E5E5E5 - White
-    }
+    // For non-threat sections, use tab-style active/inactive colors
+    return isExpanded 
+      ? 'var(--semantic-text-primary)'    // Active - white
+      : 'var(--semantic-text-secondary)'; // Inactive - grey
   };
 
   const EnrichmentContent = () => {
@@ -780,6 +821,7 @@ const populateEnrichmentData = (pane: Element) => {
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         {/* Sticky Header */}
         <div className="arkem-modal__pane-header">
+          <ShieldAlert className="arkem-modal__pane-header-icon" size={16} />
           <span className="arkem-modal__pane-header-text">Enrichment Data</span>
         </div>
 
@@ -824,33 +866,36 @@ const populateEnrichmentData = (pane: Element) => {
                     flex: 1
                   }}>
                     <span style={{
-                      fontSize: 'var(--fonts-semantic-sm)',
-                      color: getThreatLevelColor(section.threatLevel),
-                      fontWeight: section.threatLevel ? 'var(--font-weight-medium)' : 'var(--font-weight-regular)'
+                      fontSize: 'var(--fonts-semantic-xs)',
+                      color: getThreatLevelColor(section.threatLevel, isExpanded),
+                      fontWeight: isExpanded 
+                        ? 'var(--font-weight-medium)' 
+                        : 'var(--font-weight-regular)',
+                      transition: 'font-weight var(--transition-fast), color var(--transition-fast)'
                     }}>
                       {section.title}
                     </span>
                     <span style={{
                       fontSize: 'var(--fonts-semantic-xs)',
-                      color: 'var(--semantic-text-secondary)'
+                      color: 'var(--semantic-text-muted)'
                     }}>
                       • {section.count} metrics
                     </span>
                   </div>
                   
                   {/* Right side: Expand/collapse arrow */}
-                  <span style={{
-                    fontSize: 'var(--fonts-semantic-sm)',
-                    color: isExpanded 
-                      ? 'var(--semantic-text-primary)' 
-                      : isHovered 
-                        ? 'var(--semantic-text-hover)' 
-                        : 'var(--semantic-text-secondary)',
-                    marginLeft: 'var(--spacing-8)',
-                    transition: 'color var(--transition-fast)'
-                  }}>
-                    {isExpanded ? '▼' : '▶'}
-                  </span>
+                  <ChevronRight
+                    className={`arkem-modal__chevron-icon ${isExpanded ? 'arkem-modal__chevron-icon--expanded' : ''}`}
+                    size={16}
+                    style={{
+                      color: isExpanded 
+                        ? 'var(--semantic-text-primary)' 
+                        : isHovered 
+                          ? 'var(--semantic-text-hover)' 
+                          : 'var(--semantic-text-secondary)',
+                      marginLeft: 'var(--spacing-8)'
+                    }}
+                  />
                 </div>
 
                 {/* Metrics (when expanded) */}
@@ -886,10 +931,10 @@ const populateEnrichmentData = (pane: Element) => {
                           alignItems: 'center',
                           justifyContent: 'flex-end',
                           fontSize: 'var(--fonts-semantic-xs)',
-                          color: metric.critical
+                          color: (metric as any).critical
                             ? 'var(--semantic-feedback-error-base)'
                             : 'var(--semantic-text-primary)',
-                          fontWeight: metric.critical
+                          fontWeight: (metric as any).critical
                             ? 'var(--font-weight-semibold)'
                             : 'var(--font-weight-regular)',
                           textAlign: 'right'
@@ -1049,6 +1094,7 @@ export const DeviceDetails: Story = {
               {...args}
               isOpen={isOpen}
               onClose={onClose}
+              leadingIcon={<Smartphone size={24} />}
               rightSlot={
                 <>
                   <Button
@@ -1061,6 +1107,7 @@ export const DeviceDetails: Story = {
                     iconTrailing={true}
                     iconLeading={false}
                     ariaLabel="Locate on map"
+                    className="device-details-action-btn"
                   />
                   <Button
                     size="md"
@@ -1072,6 +1119,19 @@ export const DeviceDetails: Story = {
                     iconTrailing={true}
                     iconLeading={false}
                     ariaLabel="View connections"
+                    className="device-details-action-btn"
+                  />
+                  <Button
+                    size="md"
+                    hierarchy="secondary"
+                    tone="black"
+                    function="action"
+                    trailingIconName="MoreVertical"
+                    showText={false}
+                    iconTrailing={true}
+                    iconLeading={false}
+                    ariaLabel="More options"
+                    className="device-details-action-btn"
                   />
                 </>
               }

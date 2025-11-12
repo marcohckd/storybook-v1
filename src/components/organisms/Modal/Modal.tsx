@@ -22,6 +22,8 @@ export type ModalProps = {
   title: string;
   /** Layout format of the modal */
   format?: ModalFormat;
+  /** Optional leading icon for modal header */
+  leadingIcon?: ReactNode;
   /** Content to display in the header right slot */
   rightSlot?: ReactNode;
   /** Optional subheader content */
@@ -45,6 +47,7 @@ export type ModalProps = {
 export const Modal: React.FC<ModalProps> = ({
   title,
   format = "single",
+  leadingIcon,
   rightSlot,
   subHeader,
   isOpen,
@@ -118,6 +121,7 @@ export const Modal: React.FC<ModalProps> = ({
           <Header
             hierarchy="secondary"
             label={title}
+            leadingIcon={leadingIcon}
             rightSlot={
               rightSlot ? (
                 <div className="arkem-modal__right-slot">

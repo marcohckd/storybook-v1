@@ -10,7 +10,12 @@ import {
   ShieldAlert,
   ChevronRight,
   AlertTriangle,
-  Smartphone
+  Smartphone,
+  Network,
+  Server,
+  Target,
+  LocateFixed,
+  Brain
 } from "lucide-react";
 
 import { Button } from "../../atoms/Button/Button";
@@ -657,13 +662,14 @@ const populateDeviceTimeline = (pane: Element) => {
           <div
             key={idx}
             style={{
-              height: '70px',
-              padding: 'var(--radius-sm) var(--spacing-style-spacing-4px-1-5-6px)',
+              height: '56px',
+              padding: 'var(--spacing-8) var(--spacing-style-spacing-4px-1-5-6px)',
               background: 'var(--color-fill-neutral-800)',
               borderBottom: 'var(--border-width-thin) solid var(--semantic-border-muted)',
               display: 'flex',
               flexDirection: 'column',
-              gap: 'var(--spacing-style-spacing-4px-1-5-6px)'
+              gap: 'var(--spacing-4)',
+              justifyContent: 'center'
             }}
           >
             <div style={{
@@ -698,7 +704,7 @@ const populateEnrichmentData = (pane: Element) => {
       id: 'threat',
       title: 'Threat Assessment',
       count: 4,
-      threatLevel: 'critical',
+      icon: 'AlertTriangle',
       metrics: [
         { 
           label: 'THREAT SCORE:', 
@@ -707,11 +713,7 @@ const populateEnrichmentData = (pane: Element) => {
         },
         { 
           label: 'HONEYPOT:', 
-          value: (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-4)' }}>
-              YES <AlertTriangle size={12} style={{ color: 'var(--semantic-feedback-warning-base)' }} />
-            </div>
-          ), 
+          value: 'YES',
           critical: true 
         },
         { label: 'HONEYPOT PROBABILITY:', value: '85%' },
@@ -719,9 +721,26 @@ const populateEnrichmentData = (pane: Element) => {
       ]
     },
     {
+      id: 'intelligence',
+      title: 'Threat Intelligence',
+      count: 8,
+      icon: 'ShieldAlert',
+      metrics: [
+        { label: 'PULSE COUNT:', value: '42 reports' },
+        { label: 'PASSIVE DNS COUNT:', value: '228 resolutions' },
+        { label: 'URL COUNT:', value: '34 URLs' },
+        { label: 'PRIMARY TAG:', value: 'malware-distribution' },
+        { label: 'TAGS:', value: 'vpn, proxy +2' },
+        { label: 'AV COUNTRY:', value: 'Iran (IR)' },
+        { label: 'AV CITY:', value: 'Tehran' },
+        { label: 'AV ASN:', value: 'AS44244' }
+      ]
+    },
+    {
       id: 'network',
       title: 'Network Infrastructure',
       count: 7,
+      icon: 'Network',
       metrics: [
         { label: 'ORGANIZATION:', value: 'Iran Telecom PJS' },
         { label: 'HOSTNAME:', value: 'mx.isp.ir' },
@@ -736,27 +755,13 @@ const populateEnrichmentData = (pane: Element) => {
       id: 'services',
       title: 'Services & Exposure',
       count: 5,
+      icon: 'Server',
       metrics: [
         { label: 'OPEN PORTS:', value: '[80, 443, 8080]' },
         { label: 'SERVICES:', value: 'HTTP, HTTPS, SSH' },
         { label: 'VULNERABILITIES:', value: '3 CVEs ↗' },
         { label: 'DISCOVERED DOMAINS:', value: '2 domains ↗' },
         { label: 'DISCOVERED URLS:', value: '4 URLs ↗' }
-      ]
-    },
-    {
-      id: 'intelligence',
-      title: 'Threat Intelligence',
-      count: 8,
-      metrics: [
-        { label: 'PULSE COUNT:', value: '42 reports' },
-        { label: 'PASSIVE DNS COUNT:', value: '228 resolutions' },
-        { label: 'URL COUNT:', value: '34 URLs' },
-        { label: 'PRIMARY TAG:', value: 'malware-distribution' },
-        { label: 'TAGS:', value: 'vpn, proxy +2' },
-        { label: 'AV COUNTRY:', value: 'Iran (IR)' },
-        { label: 'AV CITY:', value: 'Tehran' },
-        { label: 'AV ASN:', value: 'AS44244' }
       ]
     }
   ];
@@ -767,7 +772,7 @@ const populateEnrichmentData = (pane: Element) => {
     if (level) {
       switch (level) {
         case 'critical':
-          return 'var(--color-fill-feedback-error-500)'; // #9E4B4B - Red
+          return 'var(--semantic-feedback-error-base)'; // #C55F5F - Red
         case 'high':
           return 'var(--color-fill-feedback-warning-500)'; // #A88940 - Orange
         case 'medium':
@@ -804,8 +809,8 @@ const populateEnrichmentData = (pane: Element) => {
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         {/* Sticky Header */}
         <div className="arkem-modal__pane-header">
-          <ShieldAlert className="arkem-modal__pane-header-icon" size={16} />
-          <span className="arkem-modal__pane-header-text">Enrichment Data</span>
+          <Network className="arkem-modal__pane-header-icon" size={16} />
+          <span className="arkem-modal__pane-header-text">Device Infrastructure</span>
         </div>
 
         {/* Sections */}
@@ -842,16 +847,53 @@ const populateEnrichmentData = (pane: Element) => {
                     transition: 'background var(--transition-fast)'
                   }}
                 >
-                  {/* Left side: Title and count */}
+                  {/* Left side: Icon (if present), Title and count */}
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: 'var(--spacing-8)',
                     flex: 1
                   }}>
+                    {(section as any).icon && (
+                      <>
+                        {(section as any).icon === 'AlertTriangle' ? (
+                          <AlertTriangle 
+                            size={16} 
+                            style={{ 
+                              color: getThreatLevelColor((section as any).threatLevel, isExpanded),
+                              flexShrink: 0
+                            }} 
+                          />
+                        ) : (section as any).icon === 'ShieldAlert' ? (
+                          <ShieldAlert 
+                            size={16} 
+                            style={{ 
+                              color: getThreatLevelColor((section as any).threatLevel, isExpanded),
+                              flexShrink: 0
+                            }} 
+                          />
+                        ) : (section as any).icon === 'Network' ? (
+                          <Network 
+                            size={16} 
+                            style={{ 
+                              color: getThreatLevelColor((section as any).threatLevel, isExpanded),
+                              flexShrink: 0
+                            }} 
+                          />
+                        ) : (section as any).icon === 'Server' ? (
+                          <Server 
+                            size={16} 
+                            style={{ 
+                              color: getThreatLevelColor((section as any).threatLevel, isExpanded),
+                              flexShrink: 0
+                            }} 
+                          />
+                        ) : null}
+                      </>
+                    )}
                     <span style={{
                       fontSize: 'var(--fonts-semantic-xs)',
-                      color: getThreatLevelColor(section.threatLevel, isExpanded),
+                      color: getThreatLevelColor((section as any).threatLevel, isExpanded),
                       fontWeight: isExpanded 
                         ? 'var(--font-weight-medium)' 
                         : 'var(--font-weight-regular)',
@@ -1036,7 +1078,7 @@ export const DeviceDetails: Story = {
     title: "Device Details",
     showA: true,  // Device Information (top left)
     showB: true,  // Device Timeline (bottom left)
-    showC: true,  // Enrichment Data (right)
+    showC: true,  // Device Infrastructure (right)
   },
   parameters: {
     docs: {
@@ -1064,7 +1106,7 @@ export const DeviceDetails: Story = {
               const paneA = panes[0];
               // Pane B: Device Timeline
               const paneB = panes[1];
-              // Pane C: Enrichment Data
+              // Pane C: Device Infrastructure
               const paneC = panes[2];
 
               // Populate each pane with content
@@ -1112,11 +1154,11 @@ export const DeviceDetails: Story = {
                       hierarchy="secondary"
                       tone="black"
                       function="action"
-                      trailingIconName="MapPin"
+                      trailingIconName="Network"
                       showText={false}
                       iconTrailing={true}
                       iconLeading={false}
-                      ariaLabel="Locate on map"
+                      ariaLabel="Network actions"
                       className="device-details-action-btn"
                     />
                     <Button
@@ -1124,7 +1166,7 @@ export const DeviceDetails: Story = {
                       hierarchy="secondary"
                       tone="black"
                       function="action"
-                      trailingIconName="Navigation"
+                      trailingIconName="LocateFixed"
                       showText={false}
                       iconTrailing={true}
                       iconLeading={false}
@@ -1136,11 +1178,11 @@ export const DeviceDetails: Story = {
                       hierarchy="secondary"
                       tone="black"
                       function="action"
-                      trailingIconName="MoreVertical"
+                      trailingIconName="Brain"
                       showText={false}
                       iconTrailing={true}
                       iconLeading={false}
-                      ariaLabel="More options"
+                      ariaLabel="AI Assistant"
                       className="device-details-action-btn"
                     />
                     <Button

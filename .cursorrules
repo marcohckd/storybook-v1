@@ -240,6 +240,7 @@ Before considering a component complete:
 - [ ] **Props typed** - TypeScript interfaces with sensible defaults
 - [ ] **Data attributes** - Use data-* for styling hooks, not classes
 - [ ] **Transitions** - All interactive states use transition tokens
+- [ ] **Icons normalized** - Icon sizes, colors, and props follow standardization guidelines
 
 ## Quick Reference
 
@@ -284,8 +285,38 @@ Create `src/components/<Category>/<Name>/<Name>.tsx` implementing:
 ❌ Hardcoded typography in story files → ✅ Use semantic tokens  
 ❌ Using classes for state → ✅ Use data attributes  
 ❌ `background: var(--color-fill-neutral-200)` → ✅ `background: var(--semantic-background-muted)`  
+❌ `<Search size={18} />` → ✅ `<Search size={16} />` or use CSS tokens  
+❌ `<Search style={{ color: "#838383" }} />` → ✅ `<Search style={{ color: "var(--semantic-text-secondary)" }} />`  
+❌ Icon without `aria-label` or `aria-hidden` → ✅ Include accessibility attributes  
 
-### 11. Avoid Grey Backgrounds
+### 11. Icon Usage Standards
+
+**Icon Library:**
+- Use **Lucide React exclusively** for all icons
+- Import directly: `import { Search, X, Settings } from "lucide-react"`
+
+**Icon Sizing:**
+- Always use icon size tokens: `var(--icon-size-sm)` (16px), `var(--icon-size-md)` (20px), `var(--icon-size-lg)` (24px)
+- In JSX, use token values: `size={16}`, `size={20}`, `size={24}` (never arbitrary sizes)
+- Component CSS handles sizing automatically for Button and Input icons
+
+**Icon Colors:**
+- Use semantic tokens: `var(--semantic-text-primary)`, `var(--semantic-text-secondary)`, `var(--semantic-brand-base)`
+- Prefer `currentColor` when parent has semantic color
+- Never hardcode hex colors or use primitive color tokens directly
+
+**Icon Props:**
+- **Button**: Prefer `leadingIconName`/`trailingIconName` (string) over ReactNode
+- **Input/FormField**: Use `iconLeading`/`iconTrailing` (ReactNode)
+- Always include accessibility: `aria-label` for interactive icons, `aria-hidden="true"` for decorative
+
+**Icon Spacing:**
+- Standard gap: `var(--spacing-12)` (12px) between icon and text
+- Use spacing tokens, never hardcode
+
+**Reference:** See `src/tokenization/TOKENIZATION_GUIDELINES.md` "Icon Usage Normalization" section for complete rules.
+
+### 12. Avoid Grey Backgrounds
 
 **Never use grey/neutral backgrounds in components** (except buttons which have a grey tone option). Always use semantic background tokens instead of `--color-fill-neutral-*` tokens for component backgrounds.
 

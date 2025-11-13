@@ -169,7 +169,7 @@
 /* Icon positioning */
 .arkem-input-wrapper .arkem-input__icon {
   position: absolute;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   color: var(--semantic-text-secondary);
@@ -177,6 +177,11 @@
   z-index: var(--z-index-base);
   top: 50%;
   transform: translateY(-50%);
+  line-height: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .arkem-input-wrapper:has(.arkem-input--multiline) {
@@ -188,31 +193,79 @@
   transform: none;
 }
 
+/* Leading icon positioning - aligns with input padding */
 .arkem-input-wrapper .arkem-input__icon--leading {
   left: var(--spacing-8, 8px);
 }
 
+.arkem-input-wrapper[data-size="sm"] .arkem-input__icon--leading {
+  left: var(--spacing-style-spacing-4px-1-5-6px, 6px);
+}
+
+.arkem-input-wrapper[data-size="lg"] .arkem-input__icon--leading {
+  left: var(--spacing-style-spacing-4px-3-12px, 12px);
+}
+
+/* Trailing icon positioning - aligns with input padding */
 .arkem-input-wrapper .arkem-input__icon--trailing {
   right: var(--spacing-8, 8px);
 }
 
-/* Icon sizes per input size */
-.arkem-input-wrapper[data-size="sm"] .arkem-input__icon svg {
+.arkem-input-wrapper[data-size="sm"] .arkem-input__icon--trailing {
+  right: var(--spacing-style-spacing-4px-1-5-6px, 6px);
+}
+
+.arkem-input-wrapper[data-size="lg"] .arkem-input__icon--trailing {
+  right: var(--spacing-style-spacing-4px-3-12px, 12px);
+}
+
+/* Icon container sizes per input size - ensure proper wrapping */
+.arkem-input-wrapper[data-size="sm"] .arkem-input__icon {
   width: var(--icon-size-sm);
   height: var(--icon-size-sm);
-  color: currentColor;
 }
 
-.arkem-input-wrapper[data-size="md"] .arkem-input__icon svg {
+.arkem-input-wrapper[data-size="md"] .arkem-input__icon {
   width: var(--icon-size-md);
   height: var(--icon-size-md);
-  color: currentColor;
 }
 
-.arkem-input-wrapper[data-size="lg"] .arkem-input__icon svg {
+.arkem-input-wrapper[data-size="lg"] .arkem-input__icon {
   width: var(--icon-size-lg);
   height: var(--icon-size-lg);
+}
+
+/* Icon sizes per input size - ensure proper wrapping */
+.arkem-input-wrapper .arkem-input__icon svg {
+  width: 100%;
+  height: 100%;
   color: currentColor;
+  display: block;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Handle button elements inside icon container (for clearable inputs) */
+.arkem-input-wrapper .arkem-input__icon button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  pointer-events: auto;
+}
+
+.arkem-input-wrapper .arkem-input__icon button svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* Adjust padding when icons are present - using data attributes for better browser support */

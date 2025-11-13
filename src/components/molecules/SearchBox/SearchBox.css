@@ -2,3 +2,17 @@
   width: 100%;
 }
 
+/* Ensure search icon is properly sized and aligned within input */
+.arkem-searchbox .arkem-input__icon--leading {
+  /* Maintain Input component's absolute positioning and centering */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arkem-searchbox .arkem-input__icon--leading svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  display: block;
+}
+

@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 import { Label } from "../../../atoms/Label/Label";
-import { Dropdown } from "../../../molecules/Dropdown/Dropdown";
+import { MultiSelect } from "../../../molecules/MultiSelect/MultiSelect";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../../Table";
-import { Switch } from "../../../atoms/Switch/Switch";
+import { Button } from "../../../atoms/Button/Button";
 
 export type GeographyRow = {
   id: string;
@@ -20,6 +20,8 @@ export interface GeographyTabProps {
   selectedRows?: string[];
   /** Callback function called when selection changes */
   onSelectionChange?: (selectedIds: string[]) => void;
+  /** Callback function called when a row is removed */
+  onRowRemove?: (rowId: string) => void;
 }
 
 const MOCK_GEO: GeographyRow[] = [
@@ -39,74 +41,61 @@ export const GeographyTab: React.FC<GeographyTabProps> = ({
   initialData,
   selectedRows: controlledSelectedRows,
   onSelectionChange,
+  onRowRemove,
 }) => {
   // Use MOCK_GEO if initialData is not provided or is empty
-  const data = initialData && initialData.length > 0 ? initialData : MOCK_GEO;
+  const baseData = initialData && initialData.length > 0 ? initialData : MOCK_GEO;
+  const [data, setData] = useState<GeographyRow[]>(baseData);
   
   const [internalSelected, setInternalSelected] = useState<Record<string, boolean>>({});
-  const [countryFilter, setCountryFilter] = useState<string>("all");
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+
+  // Update data when initialData changes
+  useEffect(() => {
+    if (initialData && initialData.length > 0) {
+      setData(initialData);
+    } else {
+      setData(MOCK_GEO);
+    }
+  }, [initialData]);
 
   const isControlled = controlledSelectedRows !== undefined;
   const selectedRows = isControlled
     ? controlledSelectedRows.reduce((acc, id) => ({ ...acc, [id]: true }), {} as Record<string, boolean>)
     : internalSelected;
 
-  const countries = useMemo(() => Array.from(new Set(data.map((r) => r.country))), [data]);
+  const countries = useMemo(() => Array.from(new Set(data.map((r) => r.country))).sort(), [data]);
   const filteredRows = useMemo(
-    () => data.filter((r) => countryFilter === "all" || r.country === countryFilter),
-    [data, countryFilter]
+    () => {
+      if (selectedCountries.length === 0) {
+        return data;
+      }
+      return data.filter((r) => selectedCountries.includes(r.country));
+    },
+    [data, selectedCountries]
   );
 
-  const allOnPage = filteredRows.length > 0 && filteredRows.every((r) => selectedRows[r.id]);
-  const someOnPage = filteredRows.some((r) => selectedRows[r.id]) && !allOnPage;
-
-  const toggleRow = (id: string, checked: boolean) => {
-    if (isControlled) {
-      const current = controlledSelectedRows || [];
-      const updated = checked
-        ? [...current, id]
-        : current.filter((rowId) => rowId !== id);
-      onSelectionChange?.(updated);
-    } else {
-      setInternalSelected((prev) => ({ ...prev, [id]: checked }));
-    }
+  const handleRemoveRow = (rowId: string) => {
+    setData((prev) => prev.filter((row) => row.id !== rowId));
+    onRowRemove?.(rowId);
   };
 
-  const toggleAll = (checked: boolean) => {
-    if (isControlled) {
-      const current = controlledSelectedRows || [];
-      const filteredIds = filteredRows.map((r) => r.id);
-      const updated = checked
-        ? [...new Set([...current, ...filteredIds])]
-        : current.filter((id) => !filteredIds.includes(id));
-      onSelectionChange?.(updated);
-    } else {
-      const next = { ...selectedRows };
-      filteredRows.forEach((r) => {
-        next[r.id] = checked;
-      });
-      setInternalSelected(next);
-    }
-  };
-
-  const countryOptions = [
-    { value: "all", label: "All" },
-    ...countries.map((c) => ({ value: c, label: c })),
-  ];
+  const countryOptions = countries.map((c) => ({ value: c, label: c }));
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-12, 12px)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-12, 12px)" }}>
-        <Label htmlFor="country-filter" style={{ fontSize: "var(--fonts-semantic-md)" }}>
+        <Label htmlFor="country-selector" style={{ fontSize: "var(--fonts-semantic-md)" }}>
           Country
         </Label>
-        <Dropdown
-          id="country-filter"
+        <MultiSelect
+          id="country-selector"
           options={countryOptions}
-          value={countryFilter}
-          onChange={(v) => setCountryFilter(v)}
+          value={selectedCountries}
+          onChange={setSelectedCountries}
           size="md"
-          ariaLabel="Filter by country"
+          placeholder="Select countries..."
+          ariaLabel="Select countries to display in table"
         />
       </div>
 
@@ -120,18 +109,9 @@ export const GeographyTab: React.FC<GeographyTabProps> = ({
         <Table ariaLabel="Geography access table" size="xs">
           <TableHeader>
             <TableRow>
-              <TableHead style={{ width: "60px", textAlign: "center" }}>
-                <Switch
-                  checked={allOnPage && filteredRows.length > 0}
-                  onCheckedChange={(v) => toggleAll(Boolean(v))}
-                  ariaLabel="Select all rows"
-                  size="sm"
-                />
-              </TableHead>
               <TableHead>Country</TableHead>
-              <TableHead>Region</TableHead>
-              <TableHead>Access Type</TableHead>
-              <TableHead>Last Updated</TableHead>
+              <TableHead style={{ whiteSpace: "nowrap" }}>Last Updated</TableHead>
+              <TableHead style={{ width: "60px", textAlign: "center" }}>Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -141,18 +121,25 @@ export const GeographyTab: React.FC<GeographyTabProps> = ({
                 isEven={index % 2 === 0}
                 isSelected={Boolean(selectedRows[row.id])}
               >
+                <TableCell>
+                  <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+                    {row.country}
+                  </div>
+                </TableCell>
+                <TableCell style={{ whiteSpace: "nowrap" }}>{row.updatedAt}</TableCell>
                 <TableCell style={{ width: "60px", textAlign: "center" }}>
-                  <Switch
-                    checked={Boolean(selectedRows[row.id])}
-                    onCheckedChange={(v) => toggleRow(row.id, Boolean(v))}
-                    ariaLabel={`Select ${row.country}`}
+                  <Button
                     size="sm"
+                    hierarchy="secondary"
+                    tone="grey"
+                    function="table-action"
+                    leadingIconName="Trash2"
+                    iconLeading={true}
+                    showText={false}
+                    onClick={() => handleRemoveRow(row.id)}
+                    ariaLabel={`Remove ${row.country}`}
                   />
                 </TableCell>
-                <TableCell>{row.country}</TableCell>
-                <TableCell>{row.region}</TableCell>
-                <TableCell>{row.accessType}</TableCell>
-                <TableCell>{row.updatedAt}</TableCell>
               </TableRow>
             ))}
           </TableBody>

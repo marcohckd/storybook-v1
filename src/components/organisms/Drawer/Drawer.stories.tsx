@@ -195,7 +195,7 @@ export const WithUserData: Story = {
             email: "jane.smith@example.com",
             role: "user",
           }}
-          initialEnabledModules={["monitor", "network_graph", "profile"]}
+          initialEnabledModules={["monitor", "network_graph", "arkimedes"]}
           initialLimits={{
             query: 25000,
             storage: 250,
@@ -423,9 +423,10 @@ export const IntegratedWithTable: Story = {
     ];
 
     const mockModules = [
-      { id: "monitor", name: "Monitor", icon: () => null },
+      { id: "monitor", name: "Monitor Mode", icon: () => null },
       { id: "tracer", name: "Tracer", icon: () => null },
-      { id: "network_graph", name: "Network Graph", icon: () => null },
+      { id: "network_graph", name: "Connections", icon: () => null },
+      { id: "arkimedes", name: "Arkimedes", icon: () => null },
     ];
 
     return (

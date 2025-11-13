@@ -203,7 +203,7 @@ const HeaderWithSearchWrapper = ({
       functionCount={functionCount}
       close={close}
       rightSlot={
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-8, 8px)", minWidth: "300px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--spacing-12)", minWidth: "300px" }}>
           <div style={{ flex: "1", minWidth: "200px" }}>
             <Input
               size={inputSize}

@@ -18,7 +18,10 @@ export type SearchBoxProps = {
   size?: "sm" | "md" | "lg";
   /** Callback function called when the clear button is clicked */
   onClear?: () => void;
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange" | "value" | "size">;
+} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "value" | "size" | "type"
+>;
 
 export const SearchBox: React.FC<SearchBoxProps> = ({
   value: controlledValue,
@@ -34,7 +37,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   const isControlled = controlledValue !== undefined;
   const value = isControlled ? controlledValue : internalValue;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue = e.target.value;
     if (isControlled) {
       onChange?.(newValue);
@@ -55,19 +58,46 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
     }
   };
 
+  // Filter out any conflicting props that might be in rest
+  const {
+    value: _value,
+    onChange: _onChange,
+    size: _size,
+    type: _type,
+    ...inputProps
+  } = rest as React.InputHTMLAttributes<HTMLInputElement>;
+
   return (
     <div className={`arkem-searchbox ${className || ""}`}>
       <Input
-        type="search"
-        value={value}
-        onChange={handleChange}
-        placeholder={placeholder}
-        disabled={disabled}
-        size={size}
-        iconLeading={<Search />}
-        iconTrailing={value ? <X onClick={handleClear} style={{ cursor: "pointer" }} /> : undefined}
-        ariaLabel={placeholder}
-        {...rest}
+        {...({
+          type: "search",
+          value: value || "",
+          onChange: handleChange,
+          placeholder,
+          disabled,
+          size,
+          iconLeading: <Search size={20} aria-hidden="true" />,
+          iconTrailing: value ? (
+            <button
+              onClick={handleClear}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                display: "flex",
+                alignItems: "center",
+              }}
+              aria-label="Clear search"
+              type="button"
+            >
+              <X aria-hidden="true" />
+            </button>
+          ) : undefined,
+          ariaLabel: placeholder,
+          ...inputProps,
+        } as React.ComponentProps<typeof Input>)}
       />
     </div>
   );

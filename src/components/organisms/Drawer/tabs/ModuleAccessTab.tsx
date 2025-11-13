@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Switch } from "../../../atoms/Switch/Switch";
 
-export type ModuleKey = "monitor" | "tracer" | "network_graph" | "profile" | "audit_logs";
+export type ModuleKey = "monitor" | "tracer" | "network_graph" | "arkimedes";
 
 export interface ModuleAccessTabProps {
   /** Currently enabled module keys */
@@ -18,11 +18,10 @@ export interface ModuleAccessTabProps {
 }
 
 const DEFAULT_MODULES: Array<{ id: ModuleKey; name: string; description?: string }> = [
-  { id: "monitor", name: "Monitor", description: "Real-time monitoring and alerts" },
+  { id: "monitor", name: "Monitor Mode", description: "Real-time monitoring and alerts" },
   { id: "tracer", name: "Tracer", description: "Request tracing and debugging" },
-  { id: "network_graph", name: "Network Graph", description: "Network visualization and analysis" },
-  { id: "profile", name: "Profile", description: "User profile management" },
-  { id: "audit_logs", name: "Audit Logs", description: "Access audit logs and history" },
+  { id: "network_graph", name: "Connections", description: "Network visualization and analysis" },
+  { id: "arkimedes", name: "Arkimedes", description: "Arkem Map AI Assistant" },
 ];
 
 export const ModuleAccessTab: React.FC<ModuleAccessTabProps> = ({

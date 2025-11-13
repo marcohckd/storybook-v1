@@ -21,16 +21,24 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
   className,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const triggerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const trigger = triggerRef.current?.parentElement;
+    const contentElement = contentRef.current;
+    if (!contentElement) return;
+
+    // Find the parent Tooltip container
+    const tooltipContainer = contentElement.parentElement;
+    if (!tooltipContainer) return;
+
+    // Find the TooltipTrigger (first child div that contains the trigger)
+    const trigger = tooltipContainer.firstElementChild as HTMLElement;
     if (!trigger) return;
 
     const showTooltip = () => setIsVisible(true);
     const hideTooltip = () => setIsVisible(false);
 
+    // Attach listeners to the trigger element
     trigger.addEventListener("mouseenter", showTooltip);
     trigger.addEventListener("mouseleave", hideTooltip);
 
@@ -39,8 +47,6 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
       trigger.removeEventListener("mouseleave", hideTooltip);
     };
   }, []);
-
-  if (!isVisible) return null;
 
   const sideStyles: Record<string, React.CSSProperties> = {
     top: { bottom: "100%", left: "50%", transform: "translateX(-50%)", marginBottom: `${sideOffset}px` },
@@ -64,6 +70,8 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
         fontSize: "var(--fonts-semantic-sm)",
         whiteSpace: "nowrap",
         pointerEvents: "none",
+        opacity: isVisible ? 1 : 0,
+        visibility: isVisible ? "visible" : "hidden",
         ...sideStyles[side],
       }}
     >
